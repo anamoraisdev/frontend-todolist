@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import {v4 as uuidv4} from "uuidv4"
 
 const Form = ({setTarefas, tarefas}) => {
     
@@ -9,7 +10,19 @@ const Form = ({setTarefas, tarefas}) => {
 
     const aoSalvarTarefa = (event) => {
         event.preventDefault()
-        setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo}])
+        setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo, id: uuidv4(), concluido: false}])
+    }
+
+    const aoEditarTarefa = (tarefaAEditar) => {
+        tarefas.map((tarefa) => {
+            if(tarefa.id === tarefaAEditar.id){
+                tarefa.titulo = titulo
+                tarefa.descricao = descricao
+                tarefa.categoria = categoria
+                tarefa.prazo = prazo
+            }
+        })
+        return tarefas
     }
 
     return (
