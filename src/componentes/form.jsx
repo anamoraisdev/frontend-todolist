@@ -1,13 +1,19 @@
 import { useState } from "react"
 
-const Form = () => {
-    const [titulo, setTitulo] = useState()
-    const [descricao, setDescricao] = useState()
-    const [categoria, setCategoria] = useState()
-    const [prazo, setPrazo] = useState()
+const Form = ({setTarefas, tarefas}) => {
+    
+    const [titulo, setTitulo] = useState("")
+    const [descricao, setDescricao] = useState("")
+    const [categoria, setCategoria] = useState("")
+    const [prazo, setPrazo] = useState("")
+
+    const aoSalvarTarefa = (event) => {
+        event.preventDefault()
+        setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo}])
+    }
 
     return (
-        <form>
+        <form onSubmit={(event) => aoSalvarTarefa(event)}>
             <label>
                 Titulo
                 <input 
