@@ -1,4 +1,11 @@
+import { useState } from "react"
+
 const Form = () => {
+    const [titulo, setTitulo] = useState()
+    const [descricao, setDescricao] = useState()
+    const [categoria, setCategoria] = useState()
+    const [prazo, setPrazo] = useState()
+
     return(
         <form>
             <label>
