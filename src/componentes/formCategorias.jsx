@@ -3,11 +3,12 @@ import {v4 as uuidv4} from "uuid"
 
 const FormCategorias = ({categorias, setCategorias}) => {
     const [nome, setNome]= useState("")
-    const [cor, setCor]= useState()
+    const [cor, setCor]= useState("#000000")
 
     const salvarCategoria = (event) => {
         event.preventDefault()
         setCategorias([...categorias, {nome: nome, cor: cor, id: uuidv4()}])
+        setNome("")
     }
 
     return (
