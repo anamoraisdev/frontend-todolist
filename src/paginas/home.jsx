@@ -33,7 +33,6 @@ const Home = () => {
   const openModal = (tarefa) => {
     setAcaoForm("edit-tarefa")
     setOpen(true)
-    console.log("tarefa recebida:",  tarefa)
     setTarefaAEditar(tarefa)
   }
 
@@ -43,9 +42,7 @@ const Home = () => {
     setTarefaAEditar(null)
   }
 
-  useEffect(() => {
-    console.log(tarefas)
-  },[tarefas])
+
   return (
     <div className="App">
       <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} />
@@ -57,7 +54,8 @@ const Home = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm}/>
+              <button onClick={() => setOpen(false)}>X</button>
+              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} closeModal={closeModal}/>
           </Box>
         </Modal>
       }
