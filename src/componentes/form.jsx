@@ -1,15 +1,26 @@
-import { useEffect, useState } from "react"
+import {useEffect, useState } from "react"
 import {v4 as uuidv4} from "uuid"
 
-const Form = ({setTarefas, tarefas, acaoForm}) => {
-    
-    const [titulo, setTitulo] = useState("")
-    const [descricao, setDescricao] = useState("")
-    const [categoria, setCategoria] = useState("")
-    const [prazo, setPrazo] = useState("")
+const tarefaInicial = {
+    titulo: "",
+    descricao: "",
+    categoria: "",
+    prazo: "",
 
+}
+
+const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
+    
+    const [titulo, setTitulo] = useState(tarefaAEditar ? tarefaAEditar.titulo : tarefaInicial.titulo)
+    const [descricao, setDescricao] = useState(tarefaAEditar ? tarefaAEditar.descricao : tarefaInicial.descricao)
+    const [categoria, setCategoria] = useState(tarefaAEditar ? tarefaAEditar.categoria : tarefaInicial.categoria)
+    const [prazo, setPrazo] = useState(tarefaAEditar ? tarefaAEditar.prazo : tarefaInicial.prazo)
     const aoSalvarTarefa = () => {
         setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo, id: uuidv4(), concluido: false}])
+        setTitulo("")
+        setCategoria("")
+        setDescricao("")
+        setPrazo("")
     }
 
     const aoEditarTarefa = (tarefaAEditar) => {
@@ -20,18 +31,23 @@ const Form = ({setTarefas, tarefas, acaoForm}) => {
                 tarefa.categoria = categoria
                 tarefa.prazo = prazo
             }
+            return tarefas
         })
-        return tarefas
     }
 
     const aoSubmeterForm = (event) => {
         event.preventDefault()
-        if(acaoForm === "add-task"){
+        if(acaoForm === "add-tarefa"){
             aoSalvarTarefa()
         }else if(acaoForm === "edit-tarefa"){
             aoEditarTarefa(tarefaAEditar)
         }
     }
+
+    useEffect(() => {
+        console.log("tarefa form:" , tarefaAEditar)
+    },[tarefaAEditar])
+
 
     return (
         <form onSubmit={(event) => aoSubmeterForm(event)}>
