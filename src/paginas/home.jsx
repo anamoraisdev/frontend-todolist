@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
+import FormCategorias from '../componentes/formCategorias';
 
 
 const style = {
@@ -21,6 +22,7 @@ const style = {
 
 const Home = () => {
   const [tarefas, setTarefas] = useState([])
+  const [categorias, setCategorias] = useState([])
   const [open, setOpen] = useState(false)
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
@@ -42,9 +44,14 @@ const Home = () => {
     setTarefaAEditar(null)
   }
 
+  useEffect(() => {
+    console.log("categorias", categorias)
+},[categorias])
+
 
   return (
     <div className="App">
+      <FormCategorias categorias={categorias} setCategorias={setCategorias}/>
       <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} />
       {tarefaAEditar != undefined && tarefaAEditar != null &&
         <Modal
@@ -59,7 +66,6 @@ const Home = () => {
           </Box>
         </Modal>
       }
-
       {tarefas.map((tarefa) =>
         <div>
           <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/> 
