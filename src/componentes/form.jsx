@@ -1,19 +1,40 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import {v4 as uuidv4} from "uuidv4"
 
-const Form = ({setTarefas, tarefas}) => {
+const Form = ({setTarefas, tarefas, acaoForm}) => {
     
     const [titulo, setTitulo] = useState("")
     const [descricao, setDescricao] = useState("")
     const [categoria, setCategoria] = useState("")
     const [prazo, setPrazo] = useState("")
 
-    const aoSalvarTarefa = (event) => {
+    const aoSalvarTarefa = () => {
+        setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo, id: uuidv4(), concluido: false}])
+    }
+
+    const aoEditarTarefa = (tarefaAEditar) => {
+        tarefas.map((tarefa) => {
+            if(tarefa.id === tarefaAEditar.id){
+                tarefa.titulo = titulo
+                tarefa.descricao = descricao
+                tarefa.categoria = categoria
+                tarefa.prazo = prazo
+            }
+        })
+        return tarefas
+    }
+
+    const aoSubmeterForm = (event) => {
         event.preventDefault()
-        setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo}])
+        if(acaoForm === "add-task"){
+            aoSalvarTarefa()
+        }else if(acaoForm === "edit-tarefa"){
+            aoEditarTarefa(tarefaAEditar)
+        }
     }
 
     return (
-        <form onSubmit={(event) => aoSalvarTarefa(event)}>
+        <form onSubmit={(event) => aoSubmeterForm(event)}>
             <label>
                 Titulo
                 <input 

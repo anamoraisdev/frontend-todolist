@@ -9,9 +9,11 @@ function App() {
 
   return (
     <div className="App">
-      <Form setTarefas={setTarefas} tarefas={tarefas}/>
+      <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={"add-tarefa"}/>
       {tarefas.map((tarefa) =>
-        <CardTarefa tarefa={tarefa}/> 
+        <div>
+          <CardTarefa tarefa={tarefa}/> 
+        </div>
       )}
     </div>
   );

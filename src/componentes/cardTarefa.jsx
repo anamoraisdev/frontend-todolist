@@ -1,3 +1,4 @@
+
 import { useState } from "react"
 import Form from "./form"
 import { Box, Modal } from "@mui/material"
@@ -27,9 +28,11 @@ const CardTarefa = ({tarefa}) => {
         setOpen(false)
     }
 
+const CardTarefa = ({tarefa}) => {
+
     return (
         <div>
-            <Modal
+           <Modal
                 open={open}
                 onClose={closeModal}
                 aria-labelledby="modal-modal-title"
@@ -39,15 +42,16 @@ const CardTarefa = ({tarefa}) => {
                     <Form tarefaAeditar={tarefa} acaoForm={"edit-tarefa"}/>
                 </Box>
             </Modal>
+
             <main>
                 <input type="checkbox"></input>
                 <h2>{tarefa.titulo}</h2>
                 <p>{tarefa.descricao}</p>
                 <p>{tarefa.prazo}</p>
+
                 <button onClick={() => openModal()}>editar tarefa</button>
                 <button>excluir tarefa</button>
             </main>
-
         </div>
     )
 }
