@@ -2,7 +2,7 @@
 import { useState } from "react"
 
 
-const CardTarefa = ({tarefa, openModal}) => {
+const CardTarefa = ({tarefa, openModal, excluirTarefa}) => {
 
     return (
         <div>
@@ -13,7 +13,7 @@ const CardTarefa = ({tarefa, openModal}) => {
                 <p>{tarefa.prazo}</p>
 
                 <button onClick={() => openModal(tarefa)}>editar tarefa</button>
-                <button>excluir tarefa</button>
+                <button onClick={() => excluirTarefa(tarefa)}>excluir tarefa</button>
             </main>
         </div>
     )

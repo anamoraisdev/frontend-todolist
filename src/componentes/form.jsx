@@ -6,7 +6,6 @@ const tarefaInicial = {
     descricao: "",
     categoria: "",
     prazo: "",
-
 }
 
 const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
@@ -15,6 +14,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
     const [descricao, setDescricao] = useState(tarefaAEditar ? tarefaAEditar.descricao : tarefaInicial.descricao)
     const [categoria, setCategoria] = useState(tarefaAEditar ? tarefaAEditar.categoria : tarefaInicial.categoria)
     const [prazo, setPrazo] = useState(tarefaAEditar ? tarefaAEditar.prazo : tarefaInicial.prazo)
+    
     const aoSalvarTarefa = () => {
         setTarefas([...tarefas, {titulo: titulo,descricao: descricao,categoria: categoria,prazo: prazo, id: uuidv4(), concluido: false}])
         setTitulo("")

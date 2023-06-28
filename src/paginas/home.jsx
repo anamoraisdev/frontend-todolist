@@ -24,6 +24,11 @@ const Home = () => {
   const [open, setOpen] = useState(false)
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
+
+  const excluirTarefa = (tarefaAExcluir) => {
+    let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id != tarefaAExcluir.id)
+    setTarefas(tarefasAtualizadas)
+  }
   
   const openModal = (tarefa) => {
     setAcaoForm("edit-tarefa")
@@ -39,13 +44,8 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log("tarefaAeditar:" , tarefaAEditar)
-  },[tarefaAEditar])
-
-  useEffect(() => {
-    console.log("tarefas:" , tarefas)
+    console.log(tarefas)
   },[tarefas])
-
   return (
     <div className="App">
       <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} />
@@ -64,7 +64,7 @@ const Home = () => {
 
       {tarefas.map((tarefa) =>
         <div>
-          <CardTarefa tarefa={tarefa} openModal={openModal} /> 
+          <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/> 
         </div>
       )}
     </div>
