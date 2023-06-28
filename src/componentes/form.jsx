@@ -8,7 +8,7 @@ const tarefaInicial = {
     prazo: "",
 }
 
-const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
+const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal}) => {
     
     const [titulo, setTitulo] = useState(tarefaAEditar ? tarefaAEditar.titulo : tarefaInicial.titulo)
     const [descricao, setDescricao] = useState(tarefaAEditar ? tarefaAEditar.descricao : tarefaInicial.descricao)
@@ -31,8 +31,8 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
                 tarefa.categoria = categoria
                 tarefa.prazo = prazo
             }
-            return tarefas
         })
+        return tarefas
     }
 
     const aoSubmeterForm = (event) => {
@@ -41,13 +41,9 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
             aoSalvarTarefa()
         }else if(acaoForm === "edit-tarefa"){
             aoEditarTarefa(tarefaAEditar)
+            closeModal()
         }
     }
-
-    useEffect(() => {
-        console.log("tarefa form:" , tarefaAEditar)
-    },[tarefaAEditar])
-
 
     return (
         <form onSubmit={(event) => aoSubmeterForm(event)}>
@@ -81,7 +77,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar}) => {
                 <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} />
             </label>
 
-            <button type="submit">adicionar tarefa</button>
+            <button type="submit">salvar</button>
         </form>
     )
 }
