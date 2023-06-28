@@ -26,6 +26,8 @@ const Home = () => {
   const [open, setOpen] = useState(false)
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
+  const [view, setView] = useState(false)
+
 
   const excluirTarefa = (tarefaAExcluir) => {
     let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id != tarefaAExcluir.id)
@@ -44,33 +46,61 @@ const Home = () => {
     setTarefaAEditar(null)
   }
 
-  useEffect(() => {
-    console.log("tarefas", tarefas)
-},[tarefas])
+  const mudarVisualizacao = () => {
+    if(view){
+      setView(false)
+    }else(
+      setView(true)
+    )
+  }
 
+  const filtrarPorCategoria= (categoria) => {
+    return tarefas.filter((tarefa) => tarefa.categoria[0].id === categoria.id)
+  }
 
   return (
     <div className="App">
-      <FormCategorias categorias={categorias} setCategorias={setCategorias}/>
-      <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
-      {tarefaAEditar != undefined && tarefaAEditar != null &&
-        <Modal
-          open={open}
-          onClose={closeModal}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-              <button onClick={() => setOpen(false)}>X</button>
-              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} closeModal={closeModal}/>
-          </Box>
-        </Modal>
-      }
-      {tarefas.map((tarefa) =>
-        <div key={tarefa.id}>
-          <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/> 
-        </div>
-      )}
+      <header>
+        <FormCategorias categorias={categorias} setCategorias={setCategorias}/>
+        <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
+
+        {tarefaAEditar != undefined && tarefaAEditar != null &&
+          <Modal
+            open={open}
+            onClose={closeModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+                <button onClick={() => setOpen(false)}>X</button>
+                <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} closeModal={closeModal}/>
+            </Box>
+          </Modal>
+        }
+      </header>
+
+
+      <main>
+        <button onClick={() => mudarVisualizacao()}>mudar visualizacao</button>
+        {view && categorias.map((categoria) => {
+          const tarefasDaCategoria = filtrarPorCategoria(categoria)
+          return(<div>
+            <p>
+             {categoria.nome}
+            </p>
+          
+            {tarefasDaCategoria.map((tarefa) => 
+              <CardTarefa key={tarefa.id} tarefa={tarefa}/>
+            )}
+          </div>)
+        })}
+
+        {!view && tarefas.map((tarefa) =>
+          <div key={tarefa.id}>
+            <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/> 
+          </div>
+        )}
+      </main>
     </div>
   );
 }
