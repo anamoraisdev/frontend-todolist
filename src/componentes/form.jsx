@@ -7,9 +7,10 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     const tarefaInicial = {
         titulo: "",
         descricao: "",
-        categoria: {},
+        categoria: {nome: "", cor: "", id:""},
         prazo: "",
     }
+
     const [titulo, setTitulo] = useState(tarefaAEditar ? tarefaAEditar.titulo : tarefaInicial.titulo)
     const [descricao, setDescricao] = useState(tarefaAEditar ? tarefaAEditar.descricao : tarefaInicial.descricao)
     const [categoria, setCategoria] = useState(tarefaAEditar ? tarefaAEditar.categoria : tarefaInicial.categoria)

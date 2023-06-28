@@ -3,6 +3,8 @@ import { useState } from "react"
 
 
 const CardTarefa = ({tarefa, openModal, excluirTarefa}) => {
+    console.log("tarefa:", tarefa)
+    
 
     return (
         <div>
