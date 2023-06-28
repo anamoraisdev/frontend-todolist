@@ -28,8 +28,6 @@ const CardTarefa = ({tarefa}) => {
         setOpen(false)
     }
 
-const CardTarefa = ({tarefa}) => {
-
     return (
         <div>
            <Modal
