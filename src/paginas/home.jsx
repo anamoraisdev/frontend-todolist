@@ -45,14 +45,14 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log("categorias", categorias)
-},[categorias])
+    console.log("tarefas", tarefas)
+},[tarefas])
 
 
   return (
     <div className="App">
       <FormCategorias categorias={categorias} setCategorias={setCategorias}/>
-      <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} />
+      <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
       {tarefaAEditar != undefined && tarefaAEditar != null &&
         <Modal
           open={open}
@@ -67,7 +67,7 @@ const Home = () => {
         </Modal>
       }
       {tarefas.map((tarefa) =>
-        <div>
+        <div key={tarefa.id}>
           <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/> 
         </div>
       )}
