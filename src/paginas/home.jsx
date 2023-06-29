@@ -94,6 +94,21 @@ const Home = () => {
     
   }
 
+  const enviarLembrete = () => {
+    let data = new Date
+    let dataFormatada = (data.getFullYear() + "-" + ((data.getMonth() + 1)) + "-" + (data.getDate()));                                                                                                             
+
+    lembretes.map((lembrete) => {
+      let horaAtual = Date.now()
+      if(lembrete.data == dataFormatada && lembrete.hora === horaAtual){
+        alert("kkk")
+      }
+    })
+  }
+
+  useEffect(() => {
+    enviarLembrete()
+  },[lembretes])
 
 
   return (
