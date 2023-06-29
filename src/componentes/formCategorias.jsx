@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import {v4 as uuidv4} from "uuid"
 
-const FormCategorias = ({categorias, setCategorias, setOpen}) => {
+const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar}) => {
     const [nome, setNome]= useState("")
     const [cor, setCor]= useState("#000000")
 
@@ -22,7 +22,9 @@ const FormCategorias = ({categorias, setCategorias, setOpen}) => {
                     cor da categoria 
                     <input type="color" value={cor} onChange={(event) => setCor(event.target.value)}></input>
                 </label>
-                <button onClick={() => setOpen(true)}>editar categorias</button>
+                {!categoriaAEditar && 
+                    <button onClick={() => setOpen(true)}>editar categorias</button>
+                }
                 <button type="submit">salvar nova categoria</button>
             </form>
         </main>
