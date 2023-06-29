@@ -23,10 +23,12 @@ const style = {
 const Home = () => {
   const [tarefas, setTarefas] = useState([])
   const [categorias, setCategorias] = useState([])
-  const [open, setOpen] = useState(false)
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
-  const [acaoForm, setAcaoForm] = useState("add-tarefa")
+  const [categoriaAEditar, setCategoriaAEditar] = useState(null)
+
+  const [open, setOpen] = useState(false)
   const [view, setView] = useState(false)
+  const [acaoForm, setAcaoForm] = useState("add-tarefa")
 
 
   const excluirTarefa = (tarefaAExcluir) => {
@@ -67,6 +69,10 @@ const Home = () => {
     setOpen(false)
   }
 
+  const pegarCategoria = (categoria) => {
+    setCategoriaAEditar(categoria)
+  }
+
   return (
     <div className="App">
       <header>
@@ -96,13 +102,15 @@ const Home = () => {
           >
             <Box sx={style}>
                 <button onClick={() => setOpen(false)}>X</button>
-               
-                {categorias?.map((categoria) => 
+                {!categoriaAEditar ? categorias?.map((categoria) => 
                   <div>
                     <p>{categoria.nome}</p>
                     <button onClick={() => excluirCategoria(categoria)}>excluir</button>
-                  </div>
-                )}
+                    <button onClick={() => pegarCategoria(categoria)}>editar</button>
+                  </div>)
+                  :
+                  <FormCategorias categoriaAEditar={categoriaAEditar}/>
+                }
             </Box>
       </Modal>
 
