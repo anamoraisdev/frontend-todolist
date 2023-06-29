@@ -36,7 +36,7 @@ const Home = () => {
     setOpen(true)
     setTarefaAEditar(tarefa)
   }
-  
+
   const closeModal = () => {
     setAcaoForm("add-tarefa")
     setOpen(false)
@@ -102,14 +102,14 @@ const Home = () => {
           >
             <Box sx={style}>
                 <button onClick={() => setOpen(false)}>X</button>
-                {!categoriaAEditar ? categorias?.map((categoria) => 
-                  <div>
+                {categoriaAEditar == null ? categorias?.map((categoria) => 
+                  <div key={categoria.id}>
                     <p>{categoria.nome}</p>
                     <button onClick={() => excluirCategoria(categoria)}>excluir</button>
                     <button onClick={() => pegarCategoria(categoria)}>editar</button>
                   </div>)
                   :
-                  <FormCategorias categoriaAEditar={categoriaAEditar}/>
+                  <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias}/>
                 }
             </Box>
       </Modal>
