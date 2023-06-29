@@ -11,6 +11,16 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar}) 
         setNome("")
     }
 
+    const editarCategoria = (categoriaAEditar) => {
+        categorias.map((categoria) => {
+            if(categoria.id === categoriaAEditar.id){
+                categoria.nome = nome
+                categoria.cor = cor
+            }
+        })
+        return categorias
+    }
+
     return (
         <main>
             <form onSubmit={(event) => salvarCategoria(event)}>

@@ -30,24 +30,28 @@ const Home = () => {
   const [view, setView] = useState(false)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
 
-
-  const excluirTarefa = (tarefaAExcluir) => {
-    let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id != tarefaAExcluir.id)
-    setTarefas(tarefasAtualizadas)
-  }
   
   const openModal = (tarefa) => {
     setAcaoForm("edit-tarefa")
     setOpen(true)
     setTarefaAEditar(tarefa)
   }
-
+  
   const closeModal = () => {
     setAcaoForm("add-tarefa")
     setOpen(false)
     setTarefaAEditar(null)
   }
+  
+  const closeCategorias = () => {
+    setOpen(false)
+  }
 
+  const excluirTarefa = (tarefaAExcluir) => {
+    let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id != tarefaAExcluir.id)
+    setTarefas(tarefasAtualizadas)
+  }
+  
   const mudarVisualizacao = () => {
     if(view){
       setView(false)
@@ -63,10 +67,6 @@ const Home = () => {
   const excluirCategoria = (categoria) => {
     let categoriasAtualizadas = categorias.filter((item) => item.id !== categoria.id)
     setCategorias(categoriasAtualizadas)
-  }
-
-  const closeCategorias = () => {
-    setOpen(false)
   }
 
   const pegarCategoria = (categoria) => {
