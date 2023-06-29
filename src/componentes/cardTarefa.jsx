@@ -1,11 +1,6 @@
 
-import { useState } from "react"
-
-
-const CardTarefa = ({tarefa, openModal, excluirTarefa}) => {
-    console.log("tarefa:", tarefa)
+const CardTarefa = ({tarefa, openModal, excluirTarefa, ativarLembrete}) => {
     
-
     return (
         <div>
             <main>
@@ -16,7 +11,10 @@ const CardTarefa = ({tarefa, openModal, excluirTarefa}) => {
 
                 <button onClick={() => openModal(tarefa)}>editar tarefa</button>
                 <button onClick={() => excluirTarefa(tarefa)}>excluir tarefa</button>
+                <button onClick={() => ativarLembrete(tarefa)}>ativar lembrete</button>
             </main>
+
+            
         </div>
     )
 }

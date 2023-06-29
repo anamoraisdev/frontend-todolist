@@ -4,6 +4,7 @@ import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
+import FormLembrete from '../componentes/formlembrete';
 
 
 const style = {
@@ -23,12 +24,14 @@ const style = {
 const Home = () => {
   const [tarefas, setTarefas] = useState([])
   const [categorias, setCategorias] = useState([])
+  const [lembretes, setLembretes] = useState([])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
 
   const [open, setOpen] = useState(false)
   const [view, setView] = useState(false)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
+  const [ativo, setAtivo] = useState(false)
 
   
   const openModal = (tarefa) => {
@@ -73,6 +76,40 @@ const Home = () => {
     setCategoriaAEditar(categoria)
   }
 
+  const ativarLembrete = (tarefa) => {
+    if(!ativo){
+      setOpen(true)
+      setAtivo({bolean: true, tarefa: tarefa})
+    }else {
+      let lembretesAtualizados = lembretes.filter((lembrete) => lembrete.tarefa.id !== tarefa.id)
+      setLembretes(lembretesAtualizados)
+      setAtivo(false)
+    }
+  }
+
+  const salvarInfoDoLembrete = (hora, data) => {
+    let lembrete = new Date(data)
+    let lembreteFormatado = (lembrete.getFullYear() + "-" + ((lembrete.getMonth() + 1)) + "-" + (lembrete.getDate() + 1)) 
+    setLembretes([...lembretes, {data: lembreteFormatado, tarefa: ativo.tarefa, hora: hora}])
+    
+  }
+
+  const enviarLembrete = () => {
+    let data = new Date
+    let dataFormatada = (data.getFullYear() + "-" + ((data.getMonth() + 1)) + "-" + (data.getDate()));                                                                                                             
+
+    lembretes.map((lembrete) => {
+      let horaAtual = Date.now()
+      if(lembrete.data == dataFormatada && lembrete.hora === horaAtual){
+        alert("kkk")
+      }
+    })
+  }
+
+  useEffect(() => {
+    enviarLembrete()
+  },[lembretes])
+
 
   return (
     <div className="App">
@@ -112,6 +149,18 @@ const Home = () => {
                   :
                   <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias}/>
                 }
+                
+            </Box>
+      </Modal>
+
+      <Modal
+            open={open}
+            onClose={closeCategorias}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <FormLembrete salvarInfoDoLembrete={salvarInfoDoLembrete}/>
             </Box>
       </Modal>
 
@@ -126,14 +175,14 @@ const Home = () => {
             </p>
           
             {tarefasDaCategoria.map((tarefa) => 
-              <CardTarefa key={tarefa.id} tarefa={tarefa}/>
+              <CardTarefa key={tarefa.id} tarefa={tarefa} ativarLembrete={ativarLembrete}/>
             )}
           </div>)
         })}
 
         {!view && tarefas.map((tarefa) =>
           <div key={tarefa.id}>
-            <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/> 
+            <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} ativarLembrete={ativarLembrete}/> 
           </div>
         )}
       </main>
