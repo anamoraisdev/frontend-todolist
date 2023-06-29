@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import {v4 as uuidv4} from "uuid"
 
 const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, setCategoriaAEditar}) => {
-    const [nome, setNome]= useState("")
-    const [cor, setCor]= useState("#000000")
+    const [nome, setNome]= useState(categoriaAEditar ? categoriaAEditar.nome : "")
+    const [cor, setCor]= useState(categoriaAEditar ? categoriaAEditar.cor : "#000000")
 
     const salvarCategoria = () => {
         setCategorias([...categorias, {nome: nome, cor: cor, id: uuidv4()}])
