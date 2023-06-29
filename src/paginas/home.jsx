@@ -87,6 +87,13 @@ const Home = () => {
     }
   }
 
+  const salvarInfoDoLembrete = (hora, data) => {
+    let lembrete = new Date(data)
+    let lembreteFormatado = (lembrete.getFullYear() + "-" + ((lembrete.getMonth() + 1)) + "-" + (lembrete.getDate() + 1)) 
+    setLembretes([...lembretes, {data: lembreteFormatado, tarefa: ativo.tarefa, hora: hora}])
+    
+  }
+
 
 
   return (
