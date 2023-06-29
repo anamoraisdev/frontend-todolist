@@ -58,26 +58,42 @@ const Home = () => {
     return tarefas.filter((tarefa) => tarefa.categoria[0].id === categoria.id)
   }
 
+  const closeCategorias = () => {
+    setOpen(false)
+  }
+
   return (
     <div className="App">
       <header>
-        <FormCategorias categorias={categorias} setCategorias={setCategorias}/>
+        <FormCategorias categorias={categorias} setCategorias={setCategorias} setOpen={setOpen}/>
         <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
+      </header>
 
-        {tarefaAEditar != undefined && tarefaAEditar != null &&
-          <Modal
+      {tarefaAEditar != undefined && tarefaAEditar != null &&
+        <Modal
+          open={open}
+          onClose={closeModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+              <button onClick={() => setOpen(false)}>X</button>
+              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} closeModal={closeModal}/>
+          </Box>
+        </Modal>
+      }
+
+      <Modal
             open={open}
-            onClose={closeModal}
+            onClose={closeCategorias}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
                 <button onClick={() => setOpen(false)}>X</button>
-                <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} closeModal={closeModal}/>
+                {categorias.map((categoria) => <div><p>{categoria.nome}</p></div>)}
             </Box>
-          </Modal>
-        }
-      </header>
+      </Modal>
 
 
       <main>
