@@ -58,6 +58,11 @@ const Home = () => {
     return tarefas.filter((tarefa) => tarefa.categoria[0].id === categoria.id)
   }
 
+  const excluirCategoria = (categoria) => {
+    let categoriasAtualizadas = categorias.filter((item) => item.id !== categoria.id)
+    setCategorias(categoriasAtualizadas)
+  }
+
   const closeCategorias = () => {
     setOpen(false)
   }
@@ -91,7 +96,13 @@ const Home = () => {
           >
             <Box sx={style}>
                 <button onClick={() => setOpen(false)}>X</button>
-                {categorias.map((categoria) => <div><p>{categoria.nome}</p></div>)}
+               
+                {categorias?.map((categoria) => 
+                  <div>
+                    <p>{categoria.nome}</p>
+                    <button onClick={() => excluirCategoria(categoria)}>excluir</button>
+                  </div>
+                )}
             </Box>
       </Modal>
 
