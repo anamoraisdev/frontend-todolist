@@ -2,20 +2,17 @@
 const CardTarefa = ({tarefa, openModal, excluirTarefa, ativarLembrete}) => {
     
     return (
-        <div>
-            <main>
-                <input type="checkbox"></input>
-                <h2>{tarefa.titulo}</h2>
-                <p>{tarefa.descricao}</p>
-                <p>{tarefa.prazo}</p>
-
-                <button onClick={() => openModal(tarefa)}>editar tarefa</button>
-                <button onClick={() => excluirTarefa(tarefa)}>excluir tarefa</button>
-                <button onClick={() => ativarLembrete(tarefa)}>ativar lembrete</button>
+            <main className="bg-indigo-200 shadow-lg flex p-4 m-4 justify-between rounded-md gap-3 text-slate-700">
+                <div className="flex">
+                    <input type="checkbox"></input>
+                    <h2>{tarefa.titulo}</h2>
+                </div>
+                <div className="flex gap-3">
+                    <button onClick={() => openModal(tarefa)} className=" px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar</button>
+                    <button onClick={() => excluirTarefa(tarefa)} className="px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">excluir</button>
+                    <button onClick={() => ativarLembrete(tarefa)}className="px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">lembrete</button>
+                </div>
             </main>
-
-            
-        </div>
     )
 }
 
