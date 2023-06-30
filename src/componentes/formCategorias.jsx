@@ -31,22 +31,24 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, s
     }
 
     return (
-        <main>
-            <form onSubmit={(event) => aoSubmeterForm(event)}>
-                <label>
-                    nome da categoria
-                    <input type="text" placeholder="digite um nome para sua categoria" value={nome} onChange={(event) => setNome(event.target.value)}></input>
-                </label>
-                <label>
-                    cor da categoria 
-                    <input type="color" value={cor} onChange={(event) => setCor(event.target.value)}></input>
-                </label>
+      
+        <form onSubmit={(event) => aoSubmeterForm(event)} className="bg-indigo-200 shadow-lg flex flex-col p-4 items-start m-4 rounded-md gap-3 text-slate-700">
+            <label className="flex flex-col">
+                nome da categoria
+                <input type="text" placeholder="digite um nome para sua categoria" value={nome} onChange={(event) => setNome(event.target.value)}></input>
+            </label>
+            <label className="m-2">
+                cor da categoria 
+                <input type="color" value={cor} onChange={(event) => setCor(event.target.value)} className=""></input>
+            </label>
+            <div className="flex gap-2">
+                <button type="submit" className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">salvar</button>
                 {!categoriaAEditar && 
-                    <button onClick={() => setOpen(true)}>editar categorias</button>
+                    <button onClick={() => setOpen(true)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar categorias</button>
                 }
-                <button type="submit">salvar</button>
-            </form>
-        </main>
+            </div>
+        </form>
+       
     )
 }
 export default FormCategorias

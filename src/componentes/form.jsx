@@ -49,40 +49,44 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     }
 
     return (
-        <form onSubmit={(event) => aoSubmeterForm(event)}>
-            <label>
-                Titulo
-                <input 
-                    placeholder="Digite um titulo para sua tarefa" 
-                    value={titulo} 
-                    onChange={(event) => setTitulo(event.target.value)}>
-                </input>
-            </label>
+        <form onSubmit={(event) => aoSubmeterForm(event)} className="bg-indigo-200 shadow-lg flex flex-col p-4 items-start m-4 rounded-md gap-3 text-slate-700">
+            <h1>Criar nova tarefa</h1>
+            <div className="flex flex-col gap-3 items-start">
+                <label className="flex flex-col">
+                    Titulo
+                    <input className="rounded-md"
+                        placeholder="Digite um titulo para sua tarefa" 
+                        value={titulo} 
+                        onChange={(event) => setTitulo(event.target.value)}>
+                    </input>
+                </label>
 
-            <label>
-                Descricao
-                <textarea 
-                    placeholder="Descreva sua tarefa..." 
-                    value={descricao} 
-                    onChange={(event) => setDescricao(event.target.value)}>
-                </textarea>
-            </label>
+                <label className="flex flex-col">
+                    Descricao
+                    <textarea className="rounded-md"
+                        placeholder="Descreva sua tarefa..." 
+                        value={descricao} 
+                        onChange={(event) => setDescricao(event.target.value)}>
+                    </textarea>
+                </label>
 
-            <label>
-                categoria
-                <select value={categoria} onChange={(event) => setCategoria(event.target.value)}>
-                    {categorias.map((categoria) => 
-                        <option key={categoria.id}>{categoria.nome}</option>
-                    )}
-                </select>
-            </label>
+                <label className="flex flex-col">
+                    categoria
+                    <select value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-md">
+                        {categorias.map((categoria) => 
+                            <option key={categoria.id}>{categoria.nome}</option>
+                        )}
+                    </select>
+                </label>
 
-            <label>
-                Prazo de entrega
-                <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} />
-            </label>
+                <label className="flex flex-col">
+                    Prazo de entrega
+                    <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} className="rounded-md"/>
+                </label>
 
-            <button type="submit">salvar</button>
+            </div>
+
+            <button type="submit" className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">salvar</button>
         </form>
     )
 }
