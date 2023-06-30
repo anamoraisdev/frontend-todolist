@@ -87,28 +87,30 @@ const Home = () => {
     }
   }
 
-  const salvarInfoDoLembrete = (hora, data) => {
+  const salvarInfoDoLembrete = (data) => {
     let lembrete = new Date(data)
     let lembreteFormatado = (lembrete.getFullYear() + "-" + ((lembrete.getMonth() + 1)) + "-" + (lembrete.getDate() + 1)) 
-    setLembretes([...lembretes, {data: lembreteFormatado, tarefa: ativo.tarefa, hora: hora}])
-    
+    setLembretes([...lembretes, {data: lembreteFormatado, tarefa: ativo.tarefa}])
   }
+
+  console.log(lembretes)
 
   const enviarLembrete = () => {
     let data = new Date
-    let dataFormatada = (data.getFullYear() + "-" + ((data.getMonth() + 1)) + "-" + (data.getDate()));                                                                                                             
+    let dataFormatada = (data.getFullYear() + "-" + ((data.getMonth() + 1)) + "-" + (data.getDate()));     
 
     lembretes.map((lembrete) => {
-      let horaAtual = Date.now()
-      if(lembrete.data == dataFormatada && lembrete.hora === horaAtual){
-        alert("kkk")
+      if(lembrete.data == dataFormatada){
+        alert(`Nao se esqueca de realizar a tarefa ${lembrete.tarefa.titulo}`)
+        let lembretesAtualizados = lembretes.filter((item) => item != lembrete)
+        setLembretes(lembretesAtualizados)
       }
     })
   }
 
   useEffect(() => {
     enviarLembrete()
-  },[lembretes])
+  },[10])
 
 
   return (
