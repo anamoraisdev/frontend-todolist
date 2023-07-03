@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import {v4 as uuidv4} from "uuid"
+import {useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, setCategoriaAEditar}) => {
     const [nome, setNome]= useState(categoriaAEditar ? categoriaAEditar.nome : "")
@@ -7,6 +7,7 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, s
 
     const salvarCategoria = () => {
         setCategorias([...categorias, {nome: nome, cor: cor, id: uuidv4()}])
+        localStorage.setItem("categorias", JSON.stringify([...categorias,{nome: nome, cor: cor, id: uuidv4()} ]))
         setNome("")
     }
 
@@ -17,6 +18,7 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, s
                categoria.cor = cor
             }
         })
+        localStorage.setItem("categorias", JSON.stringify([categorias]))
         return categorias
     }
 
@@ -44,7 +46,7 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, s
             <div className="flex gap-2">
                 <button type="submit" className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">salvar</button>
                 {!categoriaAEditar && 
-                    <button onClick={() => setOpen(true)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar categorias</button>
+                    <button onClick={() => setOpen("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar categorias</button>
                 }
             </div>
         </form>
