@@ -51,7 +51,7 @@ const Home = () => {
   }
 
   const excluirTarefa = (tarefaAExcluir) => {
-    let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id != tarefaAExcluir.id)
+    let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id !== tarefaAExcluir.id)
     setTarefas(tarefasAtualizadas)
   }
   
@@ -93,16 +93,14 @@ const Home = () => {
     setLembretes([...lembretes, {data: lembreteFormatado, tarefa: ativo.tarefa}])
   }
 
-  console.log(lembretes)
-
   const enviarLembrete = () => {
-    let data = new Date
+    let data = new Date()
     let dataFormatada = (data.getFullYear() + "-" + ((data.getMonth() + 1)) + "-" + (data.getDate()));     
 
     lembretes.map((lembrete) => {
-      if(lembrete.data == dataFormatada){
+      if(lembrete.data === dataFormatada){
         alert(`Nao se esqueca de realizar a tarefa ${lembrete.tarefa.titulo}`)
-        let lembretesAtualizados = lembretes.filter((item) => item != lembrete)
+        let lembretesAtualizados = lembretes.filter((item) => item !== lembrete)
         setLembretes(lembretesAtualizados)
       }
     })
@@ -110,7 +108,7 @@ const Home = () => {
 
   useEffect(() => {
     enviarLembrete()
-  },[10])
+  },[])
 
 
   return (
@@ -120,7 +118,7 @@ const Home = () => {
         <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
       </header>
 
-      {tarefaAEditar != undefined && tarefaAEditar != null &&
+      {tarefaAEditar !== undefined && tarefaAEditar !== null &&
         <Modal
           open={open}
           onClose={closeModal}
