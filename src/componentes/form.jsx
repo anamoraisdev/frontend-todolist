@@ -51,7 +51,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     }
 
     return (
-        <form onSubmit={(event) => aoSubmeterForm(event)} className="bg-indigo-200 shadow-lg flex flex-col p-4 items-start m-4 rounded-md gap-3 text-slate-700">
+        <form onSubmit={(event) => aoSubmeterForm(event)} className=" flex flex-col items-start rounded-md gap-3 text-slate-700">
             <h1>Criar nova tarefa</h1>
             <div className="flex flex-col gap-3 items-start">
                 <label className="flex flex-col">
@@ -75,7 +75,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
                 <label className="flex flex-col">
                     categoria
                     <select value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-md">
-                        {categorias.map((categoria) => 
+                        {categorias?.map((categoria) => 
                             <option key={categoria.id}>{categoria.nome}</option>
                         )}
                     </select>

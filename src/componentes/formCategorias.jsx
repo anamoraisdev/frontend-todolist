@@ -34,7 +34,7 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, s
 
     return (
       
-        <form onSubmit={(event) => aoSubmeterForm(event)} className="bg-indigo-200 shadow-lg flex flex-col p-4 items-start m-4 rounded-md gap-3 text-slate-700">
+        <form onSubmit={(event) => aoSubmeterForm(event)} className=" flex flex-col items-start rounded-md gap-3 text-slate-700">
             <label className="flex flex-col">
                 nome da categoria
                 <input type="text" placeholder="digite um nome para sua categoria" value={nome} onChange={(event) => setNome(event.target.value)}></input>

@@ -4,19 +4,22 @@ import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
+import styled from '@emotion/styled';
 
 
 const style = {
     position: 'absolute',
     display: 'flex',
-    justify: "between",
+    justify: "center",
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 200,
+    width: 400,
     bgcolor: 'background.paper',
+    bgcolor: "#c7d2fe",
     boxShadow: 24,
     p: 4,
+    m: 2,
     borderRadius: 8
 };
 
@@ -25,7 +28,7 @@ const Home = () => {
   const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState()
   const [view, setView] = useState(false)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
  
@@ -79,8 +82,13 @@ const Home = () => {
   return (
     <div className="App">
       <header>
-        <FormCategorias categorias={categorias} setCategorias={setCategorias} setOpen={setOpen}/>
-        <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
+        <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
+          <FormCategorias categorias={categorias} setCategorias={setCategorias} setOpen={setOpen}/>
+
+        </div>
+        <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
+          <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias}/>
+        </div>
       </header>
 
       {tarefaAEditar !== undefined && tarefaAEditar !== null &&
@@ -91,33 +99,40 @@ const Home = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-              <button onClick={() => setOpen(false)}>X</button>
-              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} closeModal={closeModal}/>
+              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm}/>
           </Box>
         </Modal>
       }
-      {open === "categoria" &&
-        <Modal
+    
+        {open === "categoria" && <Modal
               open={open}
               onClose={closeCategorias}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
-                  <button onClick={() => setOpen(false)}>X</button>
-                  {categoriaAEditar == null ? categorias?.map((categoria) => 
-                    <div key={categoria.id}>
-                      <p>{categoria.nome}</p>
-                      <button onClick={() => excluirCategoria(categoria)}>excluir</button>
-                      <button onClick={() => pegarCategoria(categoria)}>editar</button>
-                    </div>)
-                    :
-                    <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias}/>
-                  }
+                  <div className='flex flex-col rounded-lg w-[100%] gap-3'>
+                    <div className='flex justify-between'>
+                      <p>suas categorias</p>
+                      <button onClick={() => setOpen(false)}>X</button>
+                    </div>
+                    {categoriaAEditar == null ? categorias?.map((categoria) => 
+                      <div key={categoria.id} className='flex justify-between bg-indigo-300 py-3 px-4 rounded-lg items-center'>
+                        <p>{categoria.nome}</p>
+                        <div className='flex gap-3'>
+                          <button onClick={() => excluirCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">excluir</button>
+                          <button onClick={() => pegarCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar</button>
+                        </div>
+                      </div>)
+                      :
+                      <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias}/>
+                    }
+                  </div>
                   
               </Box>
         </Modal>
-      }
+        }
+    
      
 
 
