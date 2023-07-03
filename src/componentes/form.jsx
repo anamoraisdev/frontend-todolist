@@ -20,6 +20,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     const aoSalvarTarefa = () => {
         let categoriaCompleta = categorias.filter((item) => item.nome === categoria)
         setTarefas([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoriaCompleta, prazo: prazo, id: uuidv4(), concluido: false}])
+        localStorage.setItem("tarefas", JSON.stringify([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoriaCompleta, prazo: prazo, id: uuidv4(), concluido: false}]))
         setTitulo("")
         setCategoria("")
         setDescricao("")
@@ -35,6 +36,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
                 tarefa.prazo = prazo
             }
         })
+        localStorage.setItem("tarefas", JSON.stringify([tarefas]))
         return tarefas
     }
 
