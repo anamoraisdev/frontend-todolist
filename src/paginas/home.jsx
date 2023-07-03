@@ -21,8 +21,8 @@ const style = {
 };
 
 const Home = () => {
-  const [tarefas, setTarefas] = useState([] || JSON.parse(localStorage.getItem("tarefas")))
-  const [categorias, setCategorias] = useState([] || JSON.parse(localStorage.getItem("categorias")))
+  const [tarefas, setTarefas] = useState(JSON.parse(localStorage.getItem("tarefas")) || [])
+  const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
   const [open, setOpen] = useState(false)
@@ -123,18 +123,21 @@ const Home = () => {
 
       <main className='flex flex-col justify-center bg-indigo-200 shadow m-3 rounded-lg'>
         <button onClick={() => mudarVisualizacao()} className="m-5 py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">mudar visualizacao</button>
-        {view && categorias.map((categoria) => {
-          const tarefasDaCategoria = filtrarPorCategoria(categoria)
-          return(<div>
-            <p>
-             {categoria.nome}
-            </p>
-          
-            {tarefasDaCategoria.map((tarefa) => 
-              <CardTarefa key={tarefa.id} tarefa={tarefa}/>
-            )}
-          </div>)
-        })}
+        <div className='flex overflow-x-scroll text-center text-slate-700 gap-4'>
+          {view && categorias?.map((categoria) => {
+            const tarefasDaCategoria = filtrarPorCategoria(categoria)
+            return(
+            <div className='flex flex-col'>
+              <p>
+              {categoria?.nome}
+              </p>
+            
+              {tarefasDaCategoria?.map((tarefa) => 
+                <CardTarefa key={tarefa?.id} tarefa={tarefa}/>
+              )}
+            </div>)
+          })}
+        </div>
 
         {!view && tarefas.map((tarefa) =>
           <div key={tarefa.id}>
