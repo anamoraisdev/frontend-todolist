@@ -49,39 +49,39 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     }
 
     return (
-        <form onSubmit={(event) => aoSubmeterForm(event)} className=" flex flex-col items-start rounded-md gap-3 text-slate-700">
+        <form onSubmit={(event) => aoSubmeterForm(event)} className=" flex flex-col items-start rounded-md gap-5 text-slate-700">
             <h1>Criar nova tarefa</h1>
             <div className="flex flex-col gap-3 items-start">
-                <label className="flex flex-col">
+                <label className="flex flex-col gap-2">
                     Titulo
-                    <input className="rounded-md"
+                    <input className="rounded-lg p-2"
                         placeholder="Digite um titulo para sua tarefa" 
                         value={titulo} 
                         onChange={(event) => setTitulo(event.target.value)}>
                     </input>
                 </label>
 
-                <label className="flex flex-col">
+                <label className="flex flex-col gap-2">
                     Descricao
-                    <textarea className="rounded-md"
+                    <textarea className="rounded-lg p-2"
                         placeholder="Descreva sua tarefa..." 
                         value={descricao} 
                         onChange={(event) => setDescricao(event.target.value)}>
                     </textarea>
                 </label>
 
-                <label className="flex flex-col">
+                <label className="flex flex-col gap-2">
                     categoria
-                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-md">
+                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-lg p-2">
                         {categorias?.map((categoria) => 
                             <option key={categoria.id}>{categoria.nome}</option>
                         )}
                     </select>
                 </label>
 
-                <label className="flex flex-col">
+                <label className="flex flex-col gap-2">
                     Prazo de entrega
-                    <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} className="rounded-md"/>
+                    <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} className="rounded-lg p-2"/>
                 </label>
 
             </div>

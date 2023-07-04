@@ -23,7 +23,7 @@ const style = {
 
 const Home = () => {
   const [tarefas, setTarefas] = useState(JSON.parse(localStorage.getItem("tarefas")) || [])
-  const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
+  const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias"))|| [] )
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
 
@@ -128,7 +128,9 @@ const Home = () => {
           <div className='flex flex-col rounded-lg w-[100%] gap-3'>
             <div className='flex justify-between'>
               <p>suas categorias</p>
-              <button onClick={closeCategorias}>X</button>
+              {!categoriaAEditar && 
+                <button onClick={closeCategorias}>X</button>
+              }
             </div>
             {categoriaAEditar == null ? categorias?.map((categoria) =>
               <div key={categoria.id} className='flex justify-between bg-indigo-300 py-3 px-4 rounded-lg items-center'>
@@ -160,7 +162,7 @@ const Home = () => {
                     {categoria?.nome}
                   </p>
                 {tarefasDaCategoria.map((tarefa) =>
-                  <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/>
+                  <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas}/>
                 )}
               </div>)
           })}
@@ -168,7 +170,7 @@ const Home = () => {
 
         {!view && tarefas.map((tarefa) =>
           <div key={tarefa.id}>
-            <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} />
+            <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas}  setTarefas={setTarefas}/>
           </div>
         )}
       </main>
