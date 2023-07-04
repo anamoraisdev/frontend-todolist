@@ -4,6 +4,7 @@ import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
+import Historico from './historico';
 
 
 const style = {
@@ -31,7 +32,7 @@ const Home = () => {
   const [openCategoria, setOpenCategoria] = useState(false)
   const [view, setView] = useState(true)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
-  const [controlForms, setControlForms] = useState("categoria")
+  const [controlForms, setControlForms] = useState("tarefa")
 
 
 
@@ -79,7 +80,7 @@ const Home = () => {
 
 
   return (
-    <div className="mt-16">
+    <div className="mt-1">
       <header className='flex flex-col items-center'>
         <div className='flex justify-center gap-2 m-2'>
           <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
