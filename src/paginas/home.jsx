@@ -23,7 +23,7 @@ const style = {
 
 const Home = () => {
   const [tarefas, setTarefas] = useState(JSON.parse(localStorage.getItem("tarefas")) || [])
-  const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias"))|| [] )
+  const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias"))|| [])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
 
@@ -88,21 +88,22 @@ const Home = () => {
 
   return (
     <div className="App">
-      <header>
+      <header className='flex flex-col items-center'>
         <div className='flex justify-center gap-2 m-2'>
           <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
           <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
         </div>
         {controlForms === "categoria" && 
-          <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
+          <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
             <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias} />
           </div>
         }
         {controlForms === "tarefa" && 
-          <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
+          <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
             <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias} />
           </div>
         }
+
       </header>
 
       {tarefaAEditar !== undefined && tarefaAEditar !== null &&
@@ -150,30 +151,35 @@ const Home = () => {
 
 
 
-
-      <main className='flex flex-col justify-center bg-indigo-200 shadow m-3 rounded-lg'>
-        <button onClick={() => mudarVisualizacao()} className="m-5 py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">mudar visualizacao</button>
-        <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
-          {view && categorias.map((categoria) => {
-            const tarefasDaCategoria = filtrarPorCategoria(categoria)
-            return (
-              <div className='flex flex-col min-w-[100%]'>
-                  <p>
-                    {categoria?.nome}
-                  </p>
-                {tarefasDaCategoria.map((tarefa) =>
-                  <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas}/>
-                )}
-              </div>)
-          })}
-        </div>
-
-        {!view && tarefas.map((tarefa) =>
-          <div key={tarefa.id}>
-            <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas}  setTarefas={setTarefas}/>
+      <div className='flex flex-col items-center'>
+        <main className='flex flex-col items-center bg-indigo-200 shadow m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
+          <div className='flex'>
+            <button onClick={() => mudarVisualizacao()} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">todas</button>
+            <button onClick={() => mudarVisualizacao()} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
           </div>
-        )}
-      </main>
+          <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
+            {view && categorias.map((categoria) => {
+              const tarefasDaCategoria = filtrarPorCategoria(categoria)
+              return (
+                <div className='flex flex-col min-w-[100%]'>
+                    <p>
+                      {categoria?.nome}
+                    </p>
+                  {tarefasDaCategoria.map((tarefa) =>
+                    <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas}/>
+                  )}
+                </div>)
+            })}
+          </div>
+
+          {!view && tarefas.map((tarefa) =>
+            <div key={tarefa.id} className='min-w-[100%]'>
+              <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas}  setTarefas={setTarefas}/>
+            </div>
+          )}
+        </main>
+
+      </div>
     </div>
   );
 }
