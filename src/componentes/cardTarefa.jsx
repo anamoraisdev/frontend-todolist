@@ -2,13 +2,14 @@ import { useState } from "react"
 
 const CardTarefa = ({tarefa, openModal, excluirTarefa, tarefas, setTarefas}) => {
     const [concluido, setConcluido] = useState(false)
+    const [tarefasConcluidas, setTarefasConcluidas] = useState( JSON.parse(localStorage.getItem("tarefasConcluidas")) || [])
 
     const concluirTarefa = (valor) => {
         setConcluido(valor)
         tarefa.concluido = concluido
         let tarefasNaoConcluidas = tarefas.filter((item) => item.id !== tarefa.id)
         localStorage.setItem("tarefas", JSON.stringify([tarefasNaoConcluidas]))
-        localStorage.setItem("tarefasConcluidas", JSON.stringify([tarefa]))
+        localStorage.setItem("tarefasConcluidas", JSON.stringify([...tarefasConcluidas, tarefa]))
         setTarefas(tarefasNaoConcluidas)
 
     }
