@@ -56,6 +56,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
                     Titulo
                     <input className="rounded-lg p-2"
                         placeholder="Digite um titulo para sua tarefa" 
+                        required
                         value={titulo} 
                         onChange={(event) => setTitulo(event.target.value)}>
                     </input>
