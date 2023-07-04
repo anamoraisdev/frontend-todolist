@@ -1,7 +1,7 @@
 import {useState } from "react"
-import { v4 as uuidv4 } from "uuid"
+import {v4 as uuidv4} from "uuid"
 
-const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, setCategoriaAEditar}) => {
+const FormCategorias = ({categorias, setCategorias, openCategorias, categoriaAEditar, setCategoriaAEditar}) => {
     const [nome, setNome]= useState(categoriaAEditar ? categoriaAEditar.nome : "")
     const [cor, setCor]= useState(categoriaAEditar ? categoriaAEditar.cor : "#000000")
 
@@ -46,7 +46,7 @@ const FormCategorias = ({categorias, setCategorias, setOpen, categoriaAEditar, s
             <div className="flex gap-2">
                 <button type="submit" className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">salvar</button>
                 {!categoriaAEditar && 
-                    <button onClick={() => setOpen("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar categorias</button>
+                    <button onClick={openCategorias} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar categorias</button>
                 }
             </div>
         </form>

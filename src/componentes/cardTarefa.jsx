@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const CardTarefa = ({tarefa, openModal, excluirTarefa}) => {
     const [concluido, setConcluido] = useState(false)
     
     return (
-            <main className="bg-indigo-200 shadow-lg flex p-4 m-4 justify-between rounded-md gap-3 text-slate-700 w-[100%]">
+            <main className="bg-indigo-200 shadow-lg flex p-4 m-4 justify-between rounded-md gap-3 text-slate-700">
                 <div className="flex">
                     <input type="checkbox" value={concluido} onChange={(event) => setConcluido(event.target.checked)}></input>
                     <h2>{tarefa.titulo}</h2>
