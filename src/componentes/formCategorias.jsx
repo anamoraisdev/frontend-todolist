@@ -36,7 +36,7 @@ const FormCategorias = ({categorias, setCategorias, openCategorias, categoriaAEd
         <form onSubmit={(event) => aoSubmeterForm(event)} className=" flex flex-col items-start rounded-md gap-5 text-slate-700">
             <label className="flex flex-col gap-2">
                 nome da categoria
-                <input type="text" placeholder="digite um nome para categoria" value={nome} onChange={(event) => setNome(event.target.value)} className="rounded-lg p-2"></input>
+                <input type="text" placeholder="digite um nome para categoria" required value={nome} onChange={(event) => setNome(event.target.value)} className="rounded-lg p-2"></input>
             </label>
             <div className="flex gap-2">
                 <button type="submit" className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">salvar</button>

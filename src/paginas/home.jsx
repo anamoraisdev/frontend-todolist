@@ -29,9 +29,9 @@ const Home = () => {
 
   const [open, setOpen] = useState(false)
   const [openCategoria, setOpenCategoria] = useState(false)
-  const [view, setView] = useState(false)
+  const [view, setView] = useState(true)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
-  const [controlForms, setControlForms] = useState("")
+  const [controlForms, setControlForms] = useState("categoria")
 
 
 
@@ -61,14 +61,6 @@ const Home = () => {
     localStorage.setItem("tarefas", JSON.stringify([tarefasAtualizadas]))
   }
 
-  const mudarVisualizacao = () => {
-    if (view) {
-      setView(false)
-    } else (
-      setView(true)
-    )
-  }
-
   const filtrarPorCategoria = (categoria) => {
     console.log(categoria)
     console.log("tarefas:",tarefas)
@@ -89,7 +81,7 @@ const Home = () => {
   return (
     <div className="App">
       <header className='flex flex-col items-center'>
-        <div className='flex justify-center gap-2 m-2'>
+        <div className='flex justify-center gap-2 m-2 '>
           <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
           <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
         </div>
@@ -127,14 +119,14 @@ const Home = () => {
       >
         <Box sx={style}>
           <div className='flex flex-col rounded-lg w-[100%] gap-3'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between text-slate-700'>
               <p>suas categorias</p>
               {!categoriaAEditar && 
                 <button onClick={closeCategorias}>X</button>
               }
             </div>
             {categoriaAEditar == null ? categorias?.map((categoria) =>
-              <div key={categoria.id} className='flex justify-between bg-indigo-300 py-3 px-4 rounded-lg items-center'>
+              <div key={categoria.id} className='flex justify-between bg-indigo-200 shadow-lg py-3 px-4 rounded-lg items-center'>
                 <p>{categoria.nome}</p>
                 <div className='flex gap-3'>
                   <button onClick={() => excluirCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">excluir</button>
@@ -152,13 +144,13 @@ const Home = () => {
 
 
       <div className='flex flex-col items-center'>
-        <main className='flex flex-col items-center bg-indigo-200 shadow m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
+        <main className='flex flex-col items-center bg-indigo-200 shadow-lg m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
           <div className='flex'>
-            <button onClick={() => mudarVisualizacao()} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">todas</button>
-            <button onClick={() => mudarVisualizacao()} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
+            <button onClick={() => setView(true)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">todas</button>
+            <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
           </div>
           <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
-            {view && categorias.map((categoria) => {
+            {!view && categorias.map((categoria) => {
               const tarefasDaCategoria = filtrarPorCategoria(categoria)
               return (
                 <div className='flex flex-col min-w-[100%]'>
@@ -172,7 +164,7 @@ const Home = () => {
             })}
           </div>
 
-          {!view && tarefas.map((tarefa) =>
+          {view && tarefas.map((tarefa) =>
             <div key={tarefa.id} className='min-w-[100%]'>
               <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas}  setTarefas={setTarefas}/>
             </div>
