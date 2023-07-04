@@ -4,12 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './componentes/navbar';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Historico from './paginas/historico';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element:<App/>,
+  },
+  {
+    path: "/historico",
+    element:<Historico/>,
+  }
+]); 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Navbar/>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
