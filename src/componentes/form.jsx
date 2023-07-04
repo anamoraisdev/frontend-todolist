@@ -7,7 +7,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     const tarefaInicial = {
         titulo: "",
         descricao: "",
-        categoria: {nome: "", cor: "", id:""},
+        categoria:{},
         prazo: "",
     }
 
@@ -16,11 +16,10 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     const [categoria, setCategoria] = useState(tarefaAEditar ? tarefaAEditar.categoria : tarefaInicial.categoria)
     const [prazo, setPrazo] = useState(tarefaAEditar ? tarefaAEditar.prazo : tarefaInicial.prazo)
     
-
+    console.log("categorias Form", categorias)
     const aoSalvarTarefa = () => {
-        let categoriaCompleta = categorias.filter((item) => item.nome === categoria)
-        setTarefas([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoriaCompleta, prazo: prazo, id: uuidv4(), concluido: false}])
-        localStorage.setItem("tarefas", JSON.stringify([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoriaCompleta, prazo: prazo, id: uuidv4(), concluido: false}]))
+        setTarefas([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoria, prazo: prazo, id: uuidv4(), concluido: false}])
+        localStorage.setItem("tarefas", JSON.stringify([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoria, prazo: prazo, id: uuidv4(), concluido: false}]))
         setTitulo("")
         setCategoria("")
         setDescricao("")
@@ -74,7 +73,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
 
                 <label className="flex flex-col">
                     categoria
-                    <select value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-md">
+                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-md">
                         {categorias?.map((categoria) => 
                             <option key={categoria.id}>{categoria.nome}</option>
                         )}

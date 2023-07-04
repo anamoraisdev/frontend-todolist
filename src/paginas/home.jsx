@@ -4,7 +4,6 @@ import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
-import styled from '@emotion/styled';
 
 
 const style = {
@@ -19,7 +18,6 @@ const style = {
     bgcolor: "#c7d2fe",
     boxShadow: 24,
     p: 4,
-    m: 2,
     borderRadius: 8
 };
 
@@ -28,12 +26,14 @@ const Home = () => {
   const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
-  const [open, setOpen] = useState()
+  
+  const [open, setOpen] = useState(false)
+  const [openCategoria, setOpenCategoria] = useState(false)
   const [view, setView] = useState(false)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
  
 
-  
+  console.log("home:", categorias)
   const openModal = (tarefa) => {
     setAcaoForm("edit-tarefa")
     setOpen(true)
@@ -47,7 +47,11 @@ const Home = () => {
   }
   
   const closeCategorias = () => {
-    setOpen(false)
+    setOpenCategoria(false)
+  }
+
+  const openCategorias = () => {
+    setOpenCategoria(true)
   }
 
   const excluirTarefa = (tarefaAExcluir) => {
@@ -83,7 +87,7 @@ const Home = () => {
     <div className="App">
       <header>
         <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
-          <FormCategorias categorias={categorias} setCategorias={setCategorias} setOpen={setOpen}/>
+          <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias}/>
 
         </div>
         <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
@@ -99,13 +103,13 @@ const Home = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm}/>
+              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} categorias={categorias} closeModal={closeModal}/>
           </Box>
         </Modal>
       }
     
-        {open === "categoria" && <Modal
-              open={open}
+      {openCategoria && <Modal
+              open={openCategoria}
               onClose={closeCategorias}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
@@ -114,7 +118,7 @@ const Home = () => {
                   <div className='flex flex-col rounded-lg w-[100%] gap-3'>
                     <div className='flex justify-between'>
                       <p>suas categorias</p>
-                      <button onClick={() => setOpen(false)}>X</button>
+                      <button onClick={closeCategorias}>X</button>
                     </div>
                     {categoriaAEditar == null ? categorias?.map((categoria) => 
                       <div key={categoria.id} className='flex justify-between bg-indigo-300 py-3 px-4 rounded-lg items-center'>
@@ -125,7 +129,7 @@ const Home = () => {
                         </div>
                       </div>)
                       :
-                      <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias}/>
+                      <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias} openCategorias={openCategorias}/>
                     }
                   </div>
                   
@@ -139,7 +143,7 @@ const Home = () => {
       <main className='flex flex-col justify-center bg-indigo-200 shadow m-3 rounded-lg'>
         <button onClick={() => mudarVisualizacao()} className="m-5 py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">mudar visualizacao</button>
         <div className='flex overflow-x-scroll text-center text-slate-700 gap-4'>
-          {view && categorias?.map((categoria) => {
+          {view && categorias.map((categoria) => {
             const tarefasDaCategoria = filtrarPorCategoria(categoria)
             return(
             <div className='flex flex-col'>
@@ -147,8 +151,8 @@ const Home = () => {
               {categoria?.nome}
               </p>
             
-              {tarefasDaCategoria?.map((tarefa) => 
-                <CardTarefa key={tarefa?.id} tarefa={tarefa}/>
+              {tarefasDaCategoria.map((tarefa) => 
+                <CardTarefa key={tarefa.id} tarefa={tarefa}/>
               )}
             </div>)
           })}
