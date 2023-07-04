@@ -1,10 +1,10 @@
-import { useState } from "react"
+
 
 const Historico = ({reativarTarefa}) => {
-    const [tarefasConcluidas , setTarefasConcluidas] = useState(JSON.parse(localStorage.getItem("tarefasConcluidas")) || [])
+    const tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas")) || []
 
     return (
-        <div>
+        <div className="mt-16">
             {tarefasConcluidas.map((tarefa) => 
                 <div>
                     <p>{tarefa.titulo}</p>
