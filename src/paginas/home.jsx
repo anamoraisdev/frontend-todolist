@@ -31,6 +31,7 @@ const Home = () => {
   const [openCategoria, setOpenCategoria] = useState(false)
   const [view, setView] = useState(false)
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
+  const [controlForms, setControlForms] = useState("")
 
 
 
@@ -88,13 +89,20 @@ const Home = () => {
   return (
     <div className="App">
       <header>
-        <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
-          <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias} />
-
+        <div className='flex justify-center gap-2 m-2'>
+          <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
+          <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
         </div>
-        <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
-          <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias} />
-        </div>
+        {controlForms === "categoria" && 
+          <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
+            <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias} />
+          </div>
+        }
+        {controlForms === "tarefa" && 
+          <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg'>
+            <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias} />
+          </div>
+        }
       </header>
 
       {tarefaAEditar !== undefined && tarefaAEditar !== null &&
@@ -143,17 +151,16 @@ const Home = () => {
 
       <main className='flex flex-col justify-center bg-indigo-200 shadow m-3 rounded-lg'>
         <button onClick={() => mudarVisualizacao()} className="m-5 py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">mudar visualizacao</button>
-        <div className='flex overflow-x-scroll text-center text-slate-700 gap-4'>
+        <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
           {view && categorias.map((categoria) => {
             const tarefasDaCategoria = filtrarPorCategoria(categoria)
             return (
-              <div className='flex flex-col'>
-                <p>
-                  {categoria?.nome}
-                </p>
-
+              <div className='flex flex-col min-w-[100%]'>
+                  <p>
+                    {categoria?.nome}
+                  </p>
                 {tarefasDaCategoria.map((tarefa) =>
-                  <CardTarefa key={tarefa.id} tarefa={tarefa} />
+                  <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa}/>
                 )}
               </div>)
           })}
