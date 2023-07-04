@@ -16,7 +16,6 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     const [categoria, setCategoria] = useState(tarefaAEditar ? tarefaAEditar.categoria : tarefaInicial.categoria)
     const [prazo, setPrazo] = useState(tarefaAEditar ? tarefaAEditar.prazo : tarefaInicial.prazo)
     
-    console.log("categorias Form", categorias)
     const aoSalvarTarefa = () => {
         setTarefas([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoria, prazo: prazo, id: uuidv4(), concluido: false}])
         localStorage.setItem("tarefas", JSON.stringify([...tarefas, {titulo: titulo,descricao: descricao, categoria: categoria, prazo: prazo, id: uuidv4(), concluido: false}]))
