@@ -6,6 +6,7 @@ import { Box, Modal } from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
 import Historico from './historico';
 import Navbar from '../componentes/navbar';
+import Aviso from '../componentes/aviso';
 
 
 const style = {
@@ -92,8 +93,8 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico}/>
-      {!openHistorico ? 
+      <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} />
+      {!openHistorico ?
         <div className="mt-16">
           <header className='flex flex-col items-center'>
             <div className='flex justify-center gap-2 m-2'>
@@ -120,81 +121,89 @@ const Home = () => {
                 <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
               </div>
               <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
-                {!view && categorias.length > 0 ? categorias.map((categoria) => {
-                  const tarefasDaCategoria = filtrarPorCategoria(categoria)
-                  return (
-                    <div className='flex flex-col min-w-[100%]' key={categoria.id}>
-                      <p>
-                        {categoria?.nome}
-                      </p>
-                      {tarefasDaCategoria.map((tarefa) =>
-                        <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas}/>
-                      )}
-                    </div>)
-                }) : 
-                  <div></div>
-                }
+                {!view && tarefas.length > 0 &&
+                  categorias.map((categoria) => {
+                    const tarefasDaCategoria = filtrarPorCategoria(categoria)
+                    if (tarefasDaCategoria.length > 0){
+                      return(
+                        <div className='flex flex-col min-w-[100%]' key={categoria.id}>
+                          <p>
+                            {categoria?.nome}
+                          </p>
+                          {tarefasDaCategoria.map((tarefa) =>
+                            <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
+                          )}
+                        </div>
+                      )
+                    }else {
+                      return (
+                        ""
+                      )
+                    }
+
+                  })}
               </div>
 
-              {view && tarefas.length > 0 ? tarefas.map((tarefa) =>
-                <div key={tarefa.id} className='min-w-[100%]'>
-                  <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas}/>
-                </div>
-              ) : 
-                <div className='min-w-[100%] text-center py-4'>
-                  <p className='bg-indigo-200 shadow-lg rounded-lg'>Voce nao tem tarefas</p>
-                </div>
+              {view &&
+                tarefas.map((tarefa) =>
+                  <div key={tarefa.id} className='min-w-[100%]'>
+                    <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
+                  </div>
+                )
               }
+
+              {tarefas.length === 0 && <Aviso />}
+
             </main>
           </div>
         </div>
-          :
-        <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas} tarefas={tarefas}/>
+        :
+        <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas} tarefas={tarefas} />
       }
 
 
-        {tarefaAEditar !== undefined && tarefaAEditar !== null &&
-          <Modal
-            open={open}
-            onClose={closeModal}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} categorias={categorias} closeModal={closeModal} />
-            </Box>
-          </Modal>
-        }
-
-        {openCategoria && <Modal
-          open={openCategoria}
-          onClose={closeCategorias}
+      {tarefaAEditar !== undefined && tarefaAEditar !== null &&
+        <Modal
+          open={open}
+          onClose={closeModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <div className='flex flex-col rounded-lg w-[100%] gap-3'>
-              <div className='flex justify-between text-slate-700'>
-                <p>suas categorias</p>
-                {!categoriaAEditar &&
-                  <button onClick={closeCategorias}>X</button>
-                }
-              </div>
-              {categoriaAEditar == null ? categorias?.map((categoria) =>
-                <div key={categoria.id} className='flex justify-between bg-indigo-200 shadow-lg py-3 px-4 rounded-lg items-center'>
-                  <p>{categoria.nome}</p>
-                  <div className='flex gap-3'>
-                    <button onClick={() => excluirCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">excluir</button>
-                    <button onClick={() => pegarCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar</button>
-                  </div>
-                </div>)
-                :
-                <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias} openCategorias={openCategorias} />
-              }
-            </div>
+            <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} categorias={categorias} closeModal={closeModal} />
           </Box>
         </Modal>
-        }
+      }
+
+      {openCategoria && <Modal
+        open={openCategoria}
+        onClose={closeCategorias}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div className='flex flex-col rounded-lg w-[100%] gap-3'>
+            <div className='flex justify-between text-slate-700'>
+              <p>suas categorias</p>
+              {!categoriaAEditar &&
+                <button onClick={closeCategorias}>X</button>
+              }
+            </div>
+            {categoriaAEditar == null ? categorias?.map((categoria) =>
+              <div key={categoria.id} className='flex justify-between bg-indigo-200 shadow-lg py-3 px-4 rounded-lg items-center'>
+                <p>{categoria.nome}</p>
+                <div className='flex gap-3'>
+                  <button onClick={() => excluirCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">excluir</button>
+                  <button onClick={() => pegarCategoria(categoria)} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">editar</button>
+                </div>
+              </div>)
+              :
+              <FormCategorias categoriaAEditar={categoriaAEditar} setCategoriaAEditar={setCategoriaAEditar} categorias={categorias} openCategorias={openCategorias} />
+            }
+          </div>
+        </Box>
+      </Modal>
+      }
     </div>
   );
 }
