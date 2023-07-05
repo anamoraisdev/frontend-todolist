@@ -39,7 +39,6 @@ const Home = () => {
   const [tarefasConcluidas, setTarefasConcluidas] = useState(JSON.parse(localStorage.getItem("tarefasConcluidas")) || [])
 
 
-
   const openModal = (tarefa) => {
     setAcaoForm("edit-tarefa")
     setOpen(true)
@@ -128,7 +127,7 @@ const Home = () => {
                         {categoria?.nome}
                       </p>
                       {tarefasDaCategoria.map((tarefa) =>
-                        <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} />
+                        <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas}/>
                       )}
                     </div>)
                 })}
@@ -136,15 +135,15 @@ const Home = () => {
 
               {view && tarefas.map((tarefa) =>
                 <div key={tarefa.id} className='min-w-[100%]'>
-                  <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} />
+                  <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas}/>
                 </div>
               )}
             </main>
           </div>
         </div>
           :
-          <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas}/>
-        }
+        <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas}/>
+      }
 
 
         {tarefaAEditar !== undefined && tarefaAEditar !== null &&

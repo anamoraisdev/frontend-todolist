@@ -1,7 +1,7 @@
 
 
 const Historico = ({reativarTarefa, tarefasConcluidas}) => {
-
+    
     return (
         <div className="mt-16">
             {tarefasConcluidas.map((tarefa) => 
