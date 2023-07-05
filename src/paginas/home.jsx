@@ -39,7 +39,6 @@ const Home = () => {
   const [controlForms, setControlForms] = useState("categoria")
 
 
-
   const openModal = (tarefa) => {
     setAcaoForm("edit-tarefa")
     setOpen(true)

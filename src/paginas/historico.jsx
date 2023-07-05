@@ -1,7 +1,6 @@
 
-
-const Historico = ({ reativarTarefa, tarefasConcluidas }) => {
-
+const Historico = ({reativarTarefa, tarefasConcluidas}) => {
+    
     return (
         <div className="mt-16 text-slate-700 flex justify-center">
             <div className="mx-5 w-[600px]">

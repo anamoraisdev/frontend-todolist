@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+
 const CardTarefa = ({tarefa, openModal, excluirTarefa, tarefas, setTarefas, tarefasConcluidas, setTarefasConcluidas}) => {
     const [concluido, setConcluido] = useState(false)
 
