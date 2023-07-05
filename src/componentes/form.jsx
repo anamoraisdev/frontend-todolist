@@ -2,7 +2,7 @@ import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
 
 
-const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categorias}) => {
+const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categorias, darkMode}) => {
     
     const tarefaInicial = {
         titulo: "",
@@ -49,7 +49,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     }
 
     return (
-        <form onSubmit={(event) => aoSubmeterForm(event)} className=" flex flex-col items-start rounded-md gap-5 text-slate-700">
+        <form onSubmit={(event) => aoSubmeterForm(event)} className={`${darkMode ? "dark" : ""} flex flex-col items-start rounded-md gap-5 text-slate-700`}>
             <h1>Criar nova tarefa</h1>
             <div className="flex flex-col gap-3 items-start">
                 <label className="flex flex-col gap-2">
