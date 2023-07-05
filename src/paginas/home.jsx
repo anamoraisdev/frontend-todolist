@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
@@ -7,6 +7,7 @@ import FormCategorias from '../componentes/formCategorias';
 import Historico from './historico';
 import Navbar from '../componentes/navbar';
 import Aviso from '../componentes/aviso';
+import "./home.css"
 
 
 const style = {
@@ -33,11 +34,13 @@ const Home = () => {
 
   const [open, setOpen] = useState(false)
   const [openCategoria, setOpenCategoria] = useState(false)
-  const [view, setView] = useState(true)
   const [openHistorico, setOpenHistorico] = useState(false)
-
+  
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
   const [controlForms, setControlForms] = useState("categoria")
+  
+  const [view, setView] = useState(true)
+  const [darkMode, setDarkMode]= useState(false)
 
 
   const openModal = (tarefa) => {
@@ -90,24 +93,31 @@ const Home = () => {
     localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidasAtualizadas))
   }
 
+  const mudarMode = () => {
+    if(darkMode){
+      setDarkMode(false)
+    }else{
+      setDarkMode(true)
+    }
+  }
 
   return (
-    <div>
-      <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} />
+    <div className={`${darkMode ? "dark" : ""}`}>
+      <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} mudarMode={mudarMode} darkMode={darkMode}/>
       {!openHistorico ?
-        <div className="mt-16">
+        <div className={`${darkMode ? "dark" : ""} mt-16`}>
           <header className='flex flex-col items-center'>
             <div className='flex justify-center gap-2 m-2'>
               <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
               <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
             </div>
             {controlForms === "categoria" &&
-              <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
+              <div className={`${darkMode ? "dark" : ""} bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
                 <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias} />
               </div>
             }
             {controlForms === "tarefa" &&
-              <div className='bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
+              <div className={`${darkMode ? "dark" : ""} bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
                 <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias} />
               </div>
             }
