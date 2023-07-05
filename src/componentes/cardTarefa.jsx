@@ -1,8 +1,7 @@
 import { useState } from "react"
 
-const CardTarefa = ({tarefa, openModal, excluirTarefa, tarefas, setTarefas}) => {
+const CardTarefa = ({tarefa, openModal, excluirTarefa, tarefas, setTarefas, tarefasConcluidas}) => {
     const [concluido, setConcluido] = useState(false)
-    const [tarefasConcluidas, setTarefasConcluidas] = useState( JSON.parse(localStorage.getItem("tarefasConcluidas")) || [])
 
     const concluirTarefa = (valor) => {
         setConcluido(valor)
