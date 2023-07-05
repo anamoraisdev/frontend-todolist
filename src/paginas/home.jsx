@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
 import { Box, Modal } from "@mui/material"
@@ -28,15 +28,16 @@ const Home = () => {
   const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
   const [categoriaAEditar, setCategoriaAEditar] = useState(null)
+  const [tarefasConcluidas, setTarefasConcluidas] = useState(JSON.parse(localStorage.getItem("tarefasConcluidas")) || [])
 
   const [open, setOpen] = useState(false)
   const [openCategoria, setOpenCategoria] = useState(false)
   const [view, setView] = useState(true)
+  const [openHistorico, setOpenHistorico] = useState(false)
+
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
   const [controlForms, setControlForms] = useState("categoria")
 
-  const [openHistorico, setOpenHistorico] = useState(false)
-  const [tarefasConcluidas, setTarefasConcluidas] = useState(JSON.parse(localStorage.getItem("tarefasConcluidas")))
 
 
   const openModal = (tarefa) => {
@@ -89,6 +90,7 @@ const Home = () => {
     localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidasAtualizadas))
   }
 
+
   return (
     <div>
       <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico}/>
@@ -119,30 +121,36 @@ const Home = () => {
                 <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
               </div>
               <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
-                {!view && categorias.map((categoria) => {
+                {!view && categorias.length > 0 ? categorias.map((categoria) => {
                   const tarefasDaCategoria = filtrarPorCategoria(categoria)
                   return (
-                    <div className='flex flex-col min-w-[100%]'>
+                    <div className='flex flex-col min-w-[100%]' key={categoria.id}>
                       <p>
                         {categoria?.nome}
                       </p>
                       {tarefasDaCategoria.map((tarefa) =>
-                        <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas}/>
+                        <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas}/>
                       )}
                     </div>)
-                })}
+                }) : 
+                  <div></div>
+                }
               </div>
 
-              {view && tarefas.map((tarefa) =>
+              {view && tarefas.length > 0 ? tarefas.map((tarefa) =>
                 <div key={tarefa.id} className='min-w-[100%]'>
-                  <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas}/>
+                  <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas}/>
                 </div>
-              )}
+              ) : 
+                <div className='min-w-[100%] text-center py-4'>
+                  <p className='bg-indigo-200 shadow-lg rounded-lg'>Voce nao tem tarefas</p>
+                </div>
+              }
             </main>
           </div>
         </div>
           :
-        <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas}/>
+        <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas} tarefas={tarefas}/>
       }
 
 
