@@ -5,7 +5,7 @@ const Historico = ({reativarTarefa, tarefasConcluidas}) => {
         <div className="mt-16 text-slate-700 flex justify-center">
             <div className="mx-5 w-[600px]">
                 <div className="text-center bg-indigo-400 p-4 rounded-lg text-indigo-100 mb-4 mt-2">
-                    {tarefasConcluidas.length > 0 && <h1>Historico de tarefas concluidas</h1>}
+                    <h1>Historico de tarefas concluidas</h1>
                 </div>
                 <div className="bg-indigo-200 shadow-lg rounded-lg p-4 flex flex-col gap-3">
                     {tarefasConcluidas.length > 0 ? tarefasConcluidas.map((tarefa) =>
