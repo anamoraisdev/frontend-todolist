@@ -36,6 +36,7 @@ const Home = () => {
   const [controlForms, setControlForms] = useState("categoria")
 
   const [openHistorico, setOpenHistorico] = useState(false)
+  const [tarefasConcluidas, setTarefasConcluidas] = useState(JSON.parse(localStorage.getItem("tarefasConcluidas")) || [])
 
 
 
@@ -83,7 +84,10 @@ const Home = () => {
 
   const reativarTarefa = (tarefa) => {
     setTarefas([...tarefas, tarefa])
-    localStorage.setItem("tarefas", JSON.stringify([tarefas]))
+    let tarefasConcluidasAtualizadas = tarefasConcluidas.filter((item) => item.id !== tarefa.id)
+    setTarefasConcluidas(tarefasConcluidasAtualizadas)
+    localStorage.setItem("tarefas", JSON.stringify(tarefas))
+    localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidasAtualizadas))
   }
 
   return (
@@ -139,7 +143,7 @@ const Home = () => {
           </div>
         </div>
           :
-          <Historico reativarTarefa={reativarTarefa} />
+          <Historico reativarTarefa={reativarTarefa} tarefasConcluidas={tarefasConcluidas}/>
         }
 
 

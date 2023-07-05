@@ -1,7 +1,6 @@
 
 
-const Historico = ({reativarTarefa}) => {
-    const tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas")) || []
+const Historico = ({reativarTarefa, tarefasConcluidas}) => {
 
     return (
         <div className="mt-16">
