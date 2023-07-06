@@ -2,9 +2,9 @@
 const Historico = ({reativarTarefa, tarefasConcluidas}) => {
     
     return (
-        <div className="mt-14 text-slate-700 flex justify-center">
+        <div className="text-slate-700 flex justify-center">
             <div className="mx-5 w-[600px]">
-                <div className="text-center bg-indigo-500 p-4 rounded-lg text-indigo-100 mb-4 mt-2">
+                <div className="text-center bg-indigo-600 p-4 rounded-lg text-indigo-100 mb-4 mt-24">
                     <h1>Historico de tarefas concluidas</h1>
                 </div>
                 <div className="bg-indigo-200 dark:bg-indigo-950 shadow-lg rounded-lg p-4 flex flex-col gap-3">
