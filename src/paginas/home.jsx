@@ -1,13 +1,13 @@
 
-import {useState } from 'react';
+import {useState} from 'react';
 import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
-import { Box, Modal } from "@mui/material"
+import {Box, Modal} from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
 import Historico from './historico';
 import Navbar from '../componentes/navbar';
 import Aviso from '../componentes/aviso';
-import "./home.css"
+
 
 
 const style = {
@@ -103,38 +103,37 @@ const Home = ({darkMode, setDarkMode}) => {
     <div className={``}>
       <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} mudarMode={mudarMode} darkMode={darkMode}/>
       {!openHistorico ?
-        <div className={` fixed top-14 left-0 right-0`}>
+        <div className={`fixed top-14 left-0 right-0`}>
           <header className='flex flex-col items-center'>
-            <div className='flex justify-center gap-2 m-2'>
-              <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
-              <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
+            <div className='flex justify-center gap-2 m-7'>
+              <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-500 dark:bg-indigo-600 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
+              <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-500 dark:bg-indigo-600 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
             </div>
             {controlForms === "categoria" &&
-              <div className={`bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
+              <div className={`bg-indigo-200 dark:bg-indigo-950 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
                 <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias} />
               </div>
             }
             {controlForms === "tarefa" &&
-              <div className={` bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
+              <div className={` bg-indigo-200 dark:bg-indigo-950 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
                 <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias} />
               </div>
             }
-
           </header>
 
           <div className='flex flex-col items-center'>
-            <main className={` flex flex-col items-center bg-indigo-200 shadow-lg m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
-              <div className='flex'>
-                <button onClick={() => setView(true)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">todas</button>
-                <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
+            <main className={` dark:bg-indigo-950 flex flex-col items-center bg-indigo-200 shadow-lg m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
+              <div className='flex mt-4'>
+                <button onClick={() => setView(true)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600 dark:hover:bg-indigo-500">todas</button>
+                <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600 dark:hover:bg-indigo-500">filtrar</button>
               </div>
-              <div className='flex overflow-x-scroll text-center text-slate-700 w-[100%]'>
+              <div className='flex text-center text-slate-700 dark:text-white w-[100%]'>
                 {!view && tarefas.length > 0 &&
                   categorias.map((categoria) => {
                     const tarefasDaCategoria = filtrarPorCategoria(categoria)
                     if (tarefasDaCategoria.length > 0){
                       return(
-                        <div className='flex flex-col min-w-[100%]' key={categoria.id}>
+                        <div className='flex flex-col min-w-[100%] overflow-x-scroll ' key={categoria.id}>
                           <p>
                             {categoria?.nome}
                           </p>

@@ -16,14 +16,14 @@ const CardTarefa = ({darkMode, tarefa, openModal, excluirTarefa, tarefas, setTar
     }
     
     return (
-            <main className={` bg-indigo-200 shadow-lg flex p-4 m-4 justify-between rounded-md gap-3 text-slate-700`}>
-                <div className="flex w-100 gap-2">
+            <main className={`dark:bg-indigo-950 bg-indigo-200 shadow-xl flex p-4 m-4 justify-between rounded-md gap-3 text-slate-700`}>
+                <div className="flex w-100 gap-2 dark:text-indigo-200">
                     <input type="checkbox" value={tarefa.concluido} onChange={(event) => concluirTarefa(event.target.checked)} className="p-2 rounded-lg"></input>
-                    <h2 className="text-slate-700">{tarefa.titulo}</h2>
+                    <h2 className="">{tarefa.titulo}</h2>
                 </div>
                 <div className="flex gap-3">
-                    <button onClick={() => openModal(tarefa)} className=" px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400">editar</button>
-                    <button onClick={() => excluirTarefa(tarefa)} className="px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400">excluir</button>
+                    <button onClick={() => openModal(tarefa)} className=" px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-600">editar</button>
+                    <button onClick={() => excluirTarefa(tarefa)} className="px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-600">excluir</button>
                 </div>
             </main>
     )

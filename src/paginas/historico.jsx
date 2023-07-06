@@ -2,12 +2,12 @@
 const Historico = ({reativarTarefa, tarefasConcluidas}) => {
     
     return (
-        <div className="mt-16 text-slate-700 flex justify-center">
+        <div className="mt-14 text-slate-700 flex justify-center">
             <div className="mx-5 w-[600px]">
-                <div className="text-center bg-indigo-400 p-4 rounded-lg text-indigo-100 mb-4 mt-2">
+                <div className="text-center bg-indigo-500 p-4 rounded-lg text-indigo-100 mb-4 mt-2">
                     <h1>Historico de tarefas concluidas</h1>
                 </div>
-                <div className="bg-indigo-200 shadow-lg rounded-lg p-4 flex flex-col gap-3">
+                <div className="bg-indigo-200 dark:bg-indigo-950 shadow-lg rounded-lg p-4 flex flex-col gap-3">
                     {tarefasConcluidas.length > 0 ? tarefasConcluidas.map((tarefa) =>
 
                         <div key={tarefa.id} className="bg-indigo-200 p-4 flex justify-between rounded-lg shadow-lg">
@@ -16,10 +16,10 @@ const Historico = ({reativarTarefa, tarefasConcluidas}) => {
                         </div>
                     )
                         :
-                        <div className="flex justify-center ">
-                            <div className="bg-indigo-200 p-2 rounded-lg shadow-lg m-2 text-center">
-                                <h1 className="py-2">Voce nao tem historico de tarefas concluidas</h1>
-                                <p className="bg-indigo-100 p-2 rounded-lg shadow-lg">Ao concluir suas tarefas elas ficam aguardadas aqui, isso te permite reativa-las quando quiser</p>
+                        <div className="flex justify-center dark:text-indigo-200">
+                            <div className="bg-indigo-200 dark:bg-indigo-900 p-5 rounded-lg shadow-lg m-2 text-center">
+                                <h1 className="py-2 font-medium">Voce nao tem tarefas concluidas</h1>
+                                <p className="bg-indigo-100 dark:bg-indigo-600 p-8 rounded-lg shadow-lg m-2">Ao concluir suas tarefas elas ficam aguardadas aqui, isso te permite reativa-las quando quiser</p>
                             </div>
                         </div>
                     }
