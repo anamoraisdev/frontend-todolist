@@ -49,45 +49,46 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
     }
 
     return (
-        <form onSubmit={(event) => aoSubmeterForm(event)} className={`${darkMode ? "dark" : ""} flex flex-col items-start rounded-md gap-5 text-slate-700`}>
-            <h1>Criar nova tarefa</h1>
+        <form onSubmit={(event) => aoSubmeterForm(event)} className={`flex flex-col items-start rounded-md gap-5 text-slate-700`}>
+            <h1 className="dark:text-indigo-200">Criar nova tarefa</h1>
             <div className="flex flex-col gap-3 items-start">
-                <label className="flex flex-col gap-2">
+                <label className="flex flex-col gap-2 dark:text-indigo-200">
                     Titulo
-                    <input className="rounded-lg p-2"
-                        placeholder="Digite um titulo para sua tarefa" 
+                </label>
+                    <input className="rounded-lg p-2 dark:bg-indigo-300 dark:text-indigo-950 dark:placeholder-slate-500 focus:outline-1 focus:outline-indigo-400"
+                        placeholder="digite um titulo para sua tarefa" 
                         required
                         value={titulo} 
                         onChange={(event) => setTitulo(event.target.value)}>
                     </input>
-                </label>
 
-                <label className="flex flex-col gap-2">
+                <label className="flex flex-col gap-2 dark:text-indigo-200">
                     Descricao
-                    <textarea className="rounded-lg p-2"
-                        placeholder="Descreva sua tarefa..." 
+                </label>
+                    <textarea className="rounded-lg p-2 dark:bg-indigo-300 dark:text-indigo-950 dark:placeholder-slate-500 focus:outline-1 focus:outline-indigo-400"
+                        placeholder="descreva sua tarefa..." 
                         value={descricao} 
                         onChange={(event) => setDescricao(event.target.value)}>
                     </textarea>
-                </label>
 
-                <label className="flex flex-col gap-2">
-                    categoria
-                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-lg p-2">
-                        {categorias?.map((categoria) => 
-                            <option key={categoria.id}>{categoria.nome}</option>
+                <label className="flex flex-col gap-2 dark:text-indigo-200">
+                    Categoria
+                </label>
+                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-lg p-2 dark:bg-indigo-300 dark:text-indigo-950 dark:placeholder-slate-500 focus:outline-1 focus:outline-indigo-400 dark:text-slate-500">
+                        <option className="text-sm" selected> categoria </option>
+                       {categorias?.map((categoria) => 
+                            <option key={categoria.id} className="text-sm dark:text-indigo-950">{categoria.nome}</option>
                         )}
                     </select>
-                </label>
 
-                <label className="flex flex-col gap-2">
+                <label className="flex flex-col gap-2 dark:text-indigo-200">
                     Prazo de entrega
-                    <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} className="rounded-lg p-2"/>
                 </label>
+                    <input type="date" value={prazo} onChange={(event) => setPrazo(event.target.value)} className="text-sm rounded-lg p-2 dark:bg-indigo-300 dark:text-indigo-950 dark:placeholder-slate-500 focus:outline-1 focus:outline-indigo-400"/>
 
             </div>
 
-            <button type="submit" className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">salvar</button>
+            <button type="submit" className="py-1 px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600">salvar</button>
         </form>
     )
 }
