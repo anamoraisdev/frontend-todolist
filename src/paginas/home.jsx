@@ -25,7 +25,7 @@ const style = {
   borderRadius: 8
 };
 
-const Home = () => {
+const Home = ({darkMode, setDarkMode}) => {
   const [tarefas, setTarefas] = useState(JSON.parse(localStorage.getItem("tarefas")) || [])
   const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
   const [tarefaAEditar, setTarefaAEditar] = useState(null)
@@ -38,9 +38,7 @@ const Home = () => {
   
   const [acaoForm, setAcaoForm] = useState("add-tarefa")
   const [controlForms, setControlForms] = useState("categoria")
-  
   const [view, setView] = useState(true)
-  const [darkMode, setDarkMode]= useState(false)
 
 
   const openModal = (tarefa) => {
@@ -102,22 +100,22 @@ const Home = () => {
   }
 
   return (
-    <div className={`${darkMode ? "dark" : ""}`}>
+    <div className={``}>
       <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} mudarMode={mudarMode} darkMode={darkMode}/>
       {!openHistorico ?
-        <div className={`${darkMode ? "dark" : ""} mt-16`}>
+        <div className={` fixed top-14 left-0 right-0`}>
           <header className='flex flex-col items-center'>
             <div className='flex justify-center gap-2 m-2'>
               <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
               <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-400 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
             </div>
             {controlForms === "categoria" &&
-              <div className={`${darkMode ? "dark" : ""} bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
+              <div className={`bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
                 <FormCategorias categorias={categorias} setCategorias={setCategorias} openCategorias={openCategorias} />
               </div>
             }
             {controlForms === "tarefa" &&
-              <div className={`${darkMode ? "dark" : ""} bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
+              <div className={` bg-indigo-200 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
                 <Form setTarefas={setTarefas} tarefas={tarefas} acaoForm={acaoForm} categorias={categorias} />
               </div>
             }
@@ -125,7 +123,7 @@ const Home = () => {
           </header>
 
           <div className='flex flex-col items-center'>
-            <main className='flex flex-col items-center bg-indigo-200 shadow-lg m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]'>
+            <main className={` flex flex-col items-center bg-indigo-200 shadow-lg m-3 rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[70%] xl:min-w-[40%] xl:max-w-[40%]`}>
               <div className='flex'>
                 <button onClick={() => setView(true)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">todas</button>
                 <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-400 rounded-md text-white hover:bg-indigo-500 ">filtrar</button>
@@ -141,7 +139,7 @@ const Home = () => {
                             {categoria?.nome}
                           </p>
                           {tarefasDaCategoria.map((tarefa) =>
-                            <CardTarefa key={tarefa.id} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
+                            <CardTarefa key={tarefa.id} darkMode={darkMode} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
                           )}
                         </div>
                       )
@@ -157,7 +155,7 @@ const Home = () => {
               {view &&
                 tarefas.map((tarefa) =>
                   <div key={tarefa.id} className='min-w-[100%]'>
-                    <CardTarefa tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
+                    <CardTarefa darkMode={darkMode} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
                   </div>
                 )
               }
