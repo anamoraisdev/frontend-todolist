@@ -63,9 +63,14 @@ const Home = ({darkMode, setDarkMode}) => {
 
   const excluirTarefa = (tarefaAExcluir) => {
     let tarefasAtualizadas = tarefas.filter((tarefa) => tarefa.id !== tarefaAExcluir.id)
-    setTarefas(tarefasAtualizadas)
+    if(tarefasAtualizadas.length === 0){
+      setTarefas([])
+      localStorage.setItem("tarefas", JSON.stringify([]))
+    }else{
+      setTarefas(tarefasAtualizadas)
+      localStorage.setItem("tarefas", JSON.stringify([tarefasAtualizadas]))
+    }
     
-    localStorage.setItem("tarefas", JSON.stringify([tarefasAtualizadas]))
   }
 
   const filtrarPorCategoria = (categoria) => {
@@ -128,7 +133,7 @@ const Home = ({darkMode, setDarkMode}) => {
                 <button onClick={() => setView(true)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600 dark:hover:bg-indigo-500">todas</button>
                 <button onClick={() => setView(false)} className="m-1 px-12 sm:px-24 md:px-24 lg:px-24 xl:px-24 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600 dark:hover:bg-indigo-500">filtrar</button>
               </div>
-              <div className={`flex text-center text-slate-700 dark:text-white w-[100%] ${!view ? "overflow-x-scroll" : "" }`}>
+              <div className={`flex text-center text-slate-700 dark:text-white w-[100%] ${!view && tarefas.length > 0 ? "overflow-x-scroll" : "" }`}>
                 {!view && tarefas.length > 0 &&
                   categorias.map((categoria) => {
                     const tarefasDaCategoria = filtrarPorCategoria(categoria)
