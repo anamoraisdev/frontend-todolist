@@ -74,8 +74,7 @@ const Form = ({setTarefas, tarefas, acaoForm, tarefaAEditar, closeModal, categor
                 <label className="flex flex-col gap-2 dark:text-indigo-200">
                     Categoria
                 </label>
-                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-lg p-2 dark:bg-indigo-300 dark:text-indigo-950 dark:placeholder-slate-500 focus:outline-1 focus:outline-indigo-400 dark:text-slate-500">
-                        <option className="text-sm" selected> categoria </option>
+                    <select required value={categoria} onChange={(event) => setCategoria(event.target.value)} className="rounded-lg min-w-[50%] p-2 dark:bg-indigo-300 dark:text-indigo-950 dark:placeholder-slate-500 focus:outline-1 focus:outline-indigo-400 dark:text-slate-500">
                        {categorias?.map((categoria) => 
                             <option key={categoria.id} className="text-sm dark:text-indigo-950">{categoria.nome}</option>
                         )}
