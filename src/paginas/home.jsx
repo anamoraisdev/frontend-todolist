@@ -25,6 +25,7 @@ const style = {
   borderRadius: 8
 };
 
+
 const Home = ({darkMode, setDarkMode}) => {
   const [tarefas, setTarefas] = useState(JSON.parse(localStorage.getItem("tarefas")) || [])
   const [categorias, setCategorias] = useState(JSON.parse(localStorage.getItem("categorias")) || [])
