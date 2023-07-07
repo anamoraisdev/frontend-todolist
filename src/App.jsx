@@ -1,16 +1,18 @@
 
 import Home from './paginas/home';
 import "./app.css"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [darkMode, setDarkMode]= useState(false)
 
-  if(localStorage.theme === "dark"){
-    setDarkMode(true)
-  }else{
-    setDarkMode(false)
-  }
+  useEffect(() => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setDarkMode(true)
+    } else {
+      setDarkMode(false)
+    }
+  },[])
 
   return (
     <div className={`${darkMode? "dark" : ""}`}>
