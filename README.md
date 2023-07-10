@@ -8,7 +8,7 @@ Visitar site pelo [link]()
 
 
 ### 1.No diretório desejado, clone o projeto:
-#### `git clone git@github.com:anamoraisdev/todolist-react.git
+#### `git clone git@github.com:anamoraisdev/todolist-react.git`
 
 
 ### 2.No diretório do projeto instale as seguintes dependências:
