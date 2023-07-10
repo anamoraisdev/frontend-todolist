@@ -4,14 +4,15 @@ Vistar site pelo [link]()
 
 ## Executando projeto localmente
 
-### 1.No diretorio desejado, clone o projeto:
+### 1.No diretório desejado, clone o projeto:
 #### `git clone + URL do repositório`
 
 
-**`Nota: Em caso de dúvidas você pode acessar a documentação completa na sessão de documentacao logo abaixo`**
+**`Nota: Em caso de dúvidas você pode acessar a documentação completa na sessão de documentações`**
+**`Nota: Caso nao tenha o Node Js instalado na sua maquina, instale-o. A documentação esta disponivel na sessão de documentações`** 
 
 
-### 2.No diretorio do projeto instale as seguintes dependencias:
+### 2.No diretório do projeto instale as seguintes dependencias:
 
 ##### Tailwind Css
 Documentacao pelo [link](https://tailwindcss.com/)
@@ -19,14 +20,11 @@ Documentacao pelo [link](https://tailwindcss.com/)
 ##### Mui UI/UX
 #### `npm install @mui/material @emotion/react @emotion/styled`
  
-##### Uuid 
+##### Uuid generator
 #### `npm install uuid`
 
 
-**`Nota: Caso nao tem o Node Js instalado na sua maquina, instale-o. A documentacao esta disponivel na aba de documentação`** 
-
-
-### 3.No diretorio do projeto execute a aplicacao com o comando:
+### 3. No diretório do projeto, execute a aplicacão com o comando:
 #### `npm start`
 
 Abra http://localhost:3000 para visualizá-lo em seu navegador.
