@@ -4,13 +4,14 @@ Vistar site pelo [link]()
 
 ## Executando projeto localmente
 
+**`Nota: Caso nao tenha o Node Js instalado na sua maquina, instale-o. A documentação esta disponivel na sessão de documentações`** 
+
+
 ### 1.No diretório desejado, clone o projeto:
 #### `git clone + URL do repositório`
 
 
 **`Nota: Em caso de dúvidas você pode acessar a documentação completa na sessão de documentações`**
-
-**`Nota: Caso nao tenha o Node Js instalado na sua maquina, instale-o. A documentação esta disponivel na sessão de documentações`** 
 
 
 ### 2.No diretório do projeto instale as seguintes dependencias:
