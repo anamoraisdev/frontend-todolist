@@ -8,7 +8,7 @@ Vistar site pelo [link]()
 #### `git clone + URL do repositório`
 
 
-**`Nota: Em caso de dúvidas você pode acessar a documentação completa pelo [link](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository)`**
+**`Nota: Em caso de dúvidas você pode acessar a documentação completa na sessão de documentacao logo abaixo`**
 
 
 ### 2.No diretorio do projeto instale as seguintes dependencias:
@@ -28,7 +28,7 @@ Uuid
  
 
 
-**`Nota: Caso nao tem o Node Js instalado na sua maquina, instale-o. Documentacao disponivel pelo [link](https://nodejs.org/pt-br/download/package-manager)`** 
+**`Nota: Caso nao tem o Node Js instalado na sua maquina, instale-o. A documentacao esta disponivel na aba de documentacao`** 
 
 
 ### 3.No diretorio do projeto execute a aplicacao com o comando:
