@@ -15,7 +15,7 @@ function App() {
   },[])
 
   return (
-    <div className={`${darkMode? "dark" : ""}`}>
+    <div className={`${darkMode? "dark" : "app"}`}>
       <Home darkMode={darkMode} setDarkMode={setDarkMode}/>
     </div>
   );
