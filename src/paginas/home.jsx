@@ -124,6 +124,16 @@ const Home = ({ darkMode, setDarkMode }) => {
     setTarefaCompleta(null)
   }
 
+  const controlarForms = (value) => {
+    if(controlForms === "categoria" && value === "categoria"){
+      setControlForms(null)
+    }else if(controlForms === "tarefa" && value === "tarefa"){
+      setControlForms(null)
+    }else{
+      setControlForms(value)
+    }
+  }
+
   return (
     <div className={``}>
       <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} mudarMode={mudarMode} darkMode={darkMode} />
@@ -131,8 +141,8 @@ const Home = ({ darkMode, setDarkMode }) => {
         <div className={`mt-14`}>
           <header className='flex flex-col items-center'>
             <div className='flex justify-center gap-2 m-7'>
-              <button onClick={() => setControlForms("categoria")} className="py-1 px-3 bg-indigo-500 dark:bg-indigo-600 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
-              <button onClick={() => setControlForms("tarefa")} className="py-1 px-3 bg-indigo-500 dark:bg-indigo-600 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
+              <button onClick={() => controlarForms("categoria")} className="py-1 px-3 bg-indigo-500 dark:bg-indigo-600 rounded-md text-white hover:bg-indigo-500">adicionar categoria</button>
+              <button onClick={() => controlarForms("tarefa")} className="py-1 px-3 bg-indigo-500 dark:bg-indigo-600 rounded-md text-white hover:bg-indigo-500">adicionar tarefa</button>
             </div>
             {controlForms === "categoria" &&
               <div className={`bg-indigo-200 dark:bg-indigo-950 m-4 p-5 shadow-lg rounded-lg lg:max-w-[50%] lg:min-w-[50%] min-w-[90%] sm:min-w-[80%] xl:min-w-[40%] xl:max-w-[40%]`}>
