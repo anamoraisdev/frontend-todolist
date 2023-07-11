@@ -10,9 +10,9 @@ const Historico = ({reativarTarefa, tarefasConcluidas}) => {
                 <div className="bg-indigo-200 dark:bg-indigo-950 shadow-lg rounded-lg p-4 flex flex-col gap-3">
                     {tarefasConcluidas.length > 0 ? tarefasConcluidas.map((tarefa) =>
 
-                        <div key={tarefa.id} className="bg-indigo-200 p-4 flex justify-between rounded-lg shadow-lg">
+                        <div key={tarefa.id} className="bg-indigo-200 dark:bg-indigo-950 dark:text-indigo-200 p-4 flex justify-between rounded-lg shadow-lg">
                             <p>{tarefa.titulo}</p>
-                            <button onClick={() => reativarTarefa(tarefa)} className="px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400">reativar tarefa</button>
+                            <button onClick={() => reativarTarefa(tarefa)} className="px-3 bg-indigo-600 rounded-md text-white hover:bg-indigo-500">reativar tarefa</button>
                         </div>
                     )
                         :

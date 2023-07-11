@@ -3,8 +3,7 @@ import {v4 as uuidv4} from "uuid"
 
 const FormCategorias = ({categorias, setCategorias, openCategorias, categoriaAEditar, setCategoriaAEditar}) => {
     const [nome, setNome]= useState(categoriaAEditar ? categoriaAEditar.nome : "")
-    
-
+   
     const salvarCategoria = () => {
         setCategorias([...categorias, {nome: nome,  id: uuidv4()}])
         localStorage.setItem("categorias", JSON.stringify([...categorias,{nome: nome, id: uuidv4()} ]))
@@ -20,6 +19,8 @@ const FormCategorias = ({categorias, setCategorias, openCategorias, categoriaAEd
         localStorage.setItem("categorias", JSON.stringify([categorias]))
         return categorias
     }
+
+   
 
     const aoSubmeterForm = (event) => {
         event.preventDefault()
@@ -41,7 +42,7 @@ const FormCategorias = ({categorias, setCategorias, openCategorias, categoriaAEd
             <div className="flex gap-2">
                 <button type="submit" className="py-1 px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600">salvar</button>
                 {!categoriaAEditar && 
-                    <button onClick={openCategorias} className="py-1 px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600">editar categorias</button>
+                    <button type="button" onClick={openCategorias} className="py-1 px-3 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600">editar categorias</button>
                 }
             </div>
         </form>
