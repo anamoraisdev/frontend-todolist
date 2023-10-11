@@ -8,6 +8,8 @@ import Historico from './historico';
 import Navbar from '../componentes/navbar';
 import Aviso from '../componentes/aviso';
 import Tarefa from '../componentes/tarefa';
+import { BiEdit } from 'react-icons/bi';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 
 
@@ -18,7 +20,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width:'80%',
+  width:'90%',
+  maxWidth: '800px',
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
@@ -163,19 +166,21 @@ const Home = ({ darkMode, setDarkMode }) => {
                 <button onClick={() => setView(true)} className="m-1 px-12 sm:px-20 md:px-24 lg:px-20 xl:px-24 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600 dark:hover:bg-indigo-500">todas</button>
                 <button onClick={() => setView(false)} className="m-1 px-12 sm:px-20 md:px-24 lg:px-20 xl:px-24 bg-indigo-500 rounded-md text-white hover:bg-indigo-400 dark:bg-indigo-600 dark:hover:bg-indigo-500">filtrar</button>
               </div>
-              <div className={`flex text-center text-slate-700 dark:text-white max-w-[100%]  ${!view && tarefas.length > 0 ? "overflow-x-scroll" : ""} `}>
+              <div className={`w-[100%] flex text-center text-slate-700 dark:text-white max-w-[100%]  ${!view && tarefas.length > 0 ? "overflow-x-scroll" : ""} `}>
                 {!view && tarefas.length > 0 &&
                   categorias.map((categoria) => {
                     const tarefasDaCategoria = filtrarPorCategoria(categoria)
                     if (tarefasDaCategoria.length > 0) {
                       return (
-                        <div className='flex flex-col min-w-[100%] ' key={categoria.id}>
+                        <div className='flex flex-col min-w-[100%]' key={categoria.id}>
                           <p className='m-7 font-medium'>
                             {categoria?.nome}
                           </p>
-                          {tarefasDaCategoria.map((tarefa) =>
-                            <CardTarefa key={tarefa.id} abrirTarefa={abrirTarefa} darkMode={darkMode} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
-                          )}
+                         
+                            {tarefasDaCategoria.map((tarefa) =>
+                              <CardTarefa key={tarefa.id} abrirTarefa={abrirTarefa} darkMode={darkMode} tarefa={tarefa} openModal={openModal} excluirTarefa={excluirTarefa} tarefas={tarefas} setTarefas={setTarefas} tarefasConcluidas={tarefasConcluidas} setTarefasConcluidas={setTarefasConcluidas} />
+                            )}
+                          
                         </div>
                       )
                     } else {
@@ -206,6 +211,7 @@ const Home = ({ darkMode, setDarkMode }) => {
 
 
       {tarefaAEditar !== undefined && tarefaAEditar !== null &&
+    
         <Modal
           open={open}
           onClose={closeModal}
@@ -216,9 +222,12 @@ const Home = ({ darkMode, setDarkMode }) => {
             <Form setTarefas={setTarefas} tarefas={tarefas} tarefaAEditar={tarefaAEditar} acaoForm={acaoForm} categorias={categorias} closeModal={closeModal} />
           </Box>
         </Modal>
+      
       }
 
-      {openCategoria && <Modal
+      {openCategoria && 
+
+      <Modal
         open={openCategoria}
         onClose={closeCategorias}
         aria-labelledby="modal-modal-title"
@@ -241,8 +250,8 @@ const Home = ({ darkMode, setDarkMode }) => {
               <div key={categoria.id} className='flex justify-between bg-indigo-200 shadow-lg py-3 px-4 rounded-lg items-center'>
                 <p>{categoria.nome}</p>
                 <div className='flex gap-3'>
-                  <button onClick={() => excluirCategoria(categoria)} className="py-1 px-3 bg-indigo-600 rounded-md text-white hover:bg-indigo-500">excluir</button>
-                  <button onClick={() => pegarCategoria(categoria)} className="py-1 px-3 bg-indigo-600 rounded-md text-white hover:bg-indigo-500">editar</button>
+                  <button onClick={() => pegarCategoria(categoria)} className="py-1 px-3 bg-indigo-600 rounded-md text-white hover:bg-indigo-500"><BiEdit/></button>
+                  <button onClick={() => excluirCategoria(categoria)} className="py-1 px-3 bg-indigo-600 rounded-md text-white hover:bg-indigo-500"><RiDeleteBin5Line/></button>
                 </div>
               </div>)
               :
@@ -251,9 +260,12 @@ const Home = ({ darkMode, setDarkMode }) => {
           </div>
         </Box>
       </Modal>
+  
       }
 
       {verTarefa && tarefaCompleta != null && tarefaAEditar === null &&
+
+
         <Modal
           open={verTarefa}
           onClose={fecharTarefa}
@@ -264,6 +276,7 @@ const Home = ({ darkMode, setDarkMode }) => {
             <Tarefa tarefa={tarefaCompleta} fecharTarefa={fecharTarefa}/>
           </Box>
         </Modal>
+    
       }
     </div>
   );
