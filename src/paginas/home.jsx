@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Form from '../componentes/form';
 import CardTarefa from '../componentes/cardTarefa';
-import { Box, Modal } from "@mui/material"
+import { Box, Modal} from "@mui/material"
 import FormCategorias from '../componentes/formCategorias';
 import Historico from './historico';
 import Navbar from '../componentes/navbar';
@@ -18,12 +18,12 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width:'80%',
   bgcolor: 'background.paper',
-  bgcolor: "#c7d2fe",
   boxShadow: 24,
   p: 4,
-  borderRadius: 8
+  borderRadius: 8,
+  
 };
 
 
@@ -137,6 +137,7 @@ const Home = ({ darkMode, setDarkMode }) => {
   return (
     <div className={``}>
       <Navbar setOpenHistorico={setOpenHistorico} openHistorico={openHistorico} mudarMode={mudarMode} darkMode={darkMode} />
+
       {!openHistorico ?
         <div className={`mt-14`}>
           <header className='flex flex-col items-center'>
