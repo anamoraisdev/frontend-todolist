@@ -4,7 +4,7 @@ const Tarefa = ({ tarefa, fecharTarefa }) => {
         <div className="w-[100%]">
             <header className="flex justify-between items-start">
                 <div className="">
-                    <h1 className="font-medium text-indigo-900 text-4xl m-0">
+                    <h1 className="font-medium text-indigo-900 text-4xl m-0 break-all">
                         {tarefa.titulo}
                     </h1>
                     <div className=" flex gap-3 font medium text-slate-500">
